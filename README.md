@@ -8,7 +8,7 @@ Each subdirectory of the `data` directory contains a particular type of data.
 Each subdirectory within that contains the data in a particular format. Files
 are named by the version hash of the build they were derived from.
 
-	`data/<type>/<version-hash>.<type>`
+	data/<type>/<version-hash>.<type>
 
 Available types and formats are:
 
@@ -23,6 +23,10 @@ version hashes.
 
 The `latest.json` file contains metadata about the latest build (that is, the
 latest in this archive).
+
+Files in this repository can be accessed through HTTP via the following URL:
+
+	https://raw.githubusercontent.com/RobloxAPI/archive/master/
 
 The API dumps in JSON format have been translated from the original dump
 format. Their content may change over time as they become more accurate.

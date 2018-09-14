@@ -365,7 +365,7 @@ const Output = `../../data/api-dump/json`
 
 func main() {
 	// Backport unavailable fields with the first stable JSON dump.
-	f, err := os.Open(`version-9d38e4c6fb804c52.json`)
+	f, err := os.Open(`../stable.json`)
 	if err != nil {
 		fmt.Println("failed to open stable dump:", err)
 	}

@@ -203,7 +203,7 @@ func PreTransform(root *rbxapidump.Root, first *rbxapijson.Root) {
 	})
 }
 
-func transformType(dst *rbxapijson.Type, src *rbxapijson.Type, types map[string][]rbxapijson.Type) {
+func transformType(dst *rbxapijson.Type, src *rbxapijson.Type, types *Types) {
 	// Try getting category from source.
 	if src != nil {
 		if dst.Category == "" {
@@ -212,7 +212,7 @@ func transformType(dst *rbxapijson.Type, src *rbxapijson.Type, types map[string]
 	}
 	// Try getting category from corpus of known types.
 	if dst.Category == "" {
-		if ts := types[dst.Name]; len(ts) > 0 {
+		if ts := types.Get(dst.Name); len(ts) > 0 {
 			dst.Category = ts[0].Category
 			// If there were more than one type mapped to the name, then we
 			// would have to figure out which to use based on the context.
@@ -233,7 +233,7 @@ func transformType(dst *rbxapijson.Type, src *rbxapijson.Type, types map[string]
 			dst.Name = src.Name
 			// Try getting category from new name, if necessary.
 			if dst.Category == "" {
-				if ts := types[dst.Name]; len(ts) > 0 {
+				if ts := types.Get(dst.Name); len(ts) > 0 {
 					dst.Category = ts[0].Category
 				}
 			}
@@ -241,7 +241,7 @@ func transformType(dst *rbxapijson.Type, src *rbxapijson.Type, types map[string]
 	}
 }
 
-func transformParameters(dst *[]rbxapijson.Parameter, src *[]rbxapijson.Parameter, types map[string][]rbxapijson.Type) {
+func transformParameters(dst *[]rbxapijson.Parameter, src *[]rbxapijson.Parameter, types *Types) {
 	if src == nil {
 		for i := range *dst {
 			transformType(&((*dst)[i].Type), nil, types)
@@ -270,7 +270,7 @@ func transformParameters(dst *[]rbxapijson.Parameter, src *[]rbxapijson.Paramete
 	}
 }
 
-func PostTransform(jroot, first *rbxapijson.Root, types map[string][]rbxapijson.Type) {
+func PostTransform(jroot, first *rbxapijson.Root, types *Types) {
 	VisitClasses(jroot, func(c rbxapi.Class) {
 		class := c.(*rbxapijson.Class)
 		if class.Name == "Instance" {
@@ -363,6 +363,30 @@ func PostTransform(jroot, first *rbxapijson.Root, types map[string][]rbxapijson.
 const Input = `../../data/api-dump/txt`
 const Output = `../../data/api-dump/json`
 
+type Types struct {
+	Map map[string][]rbxapijson.Type
+	sync.Mutex
+}
+
+func (t *Types) Get(k string) []rbxapijson.Type {
+	t.Lock()
+	defer t.Unlock()
+	return t.Map[k]
+}
+
+func (t *Types) Get2(k string) ([]rbxapijson.Type, bool) {
+	t.Lock()
+	defer t.Unlock()
+	v, ok := t.Map[k]
+	return v, ok
+}
+
+func (t *Types) Set(k string, v []rbxapijson.Type) {
+	t.Lock()
+	defer t.Unlock()
+	t.Map[k] = v
+}
+
 func main() {
 	// Backport unavailable fields with the first stable JSON dump.
 	f, err := os.Open(`../stable.json`)
@@ -388,35 +412,36 @@ func main() {
 	}
 
 	// Manually add types that had been removed at some point.
-	types := map[string][]rbxapijson.Type{
-		// Replaced by "Class:<class>".
-		"Object": {{Category: "DataType", Name: "Object"}},
-		// Renamed to "CFrame".
-		"CoordinateFrame": {{Category: "DataType", Name: "CoordinateFrame"}},
-		// All references removed.
-		"SystemAddress":        {{Category: "DataType", Name: "SystemAddress"}},
-		"BuildPermission":      {{Category: "Enum", Name: "BuildPermission"}},
-		"PhysicsReceiveMethod": {{Category: "Enum", Name: "PhysicsReceiveMethod"}},
-		"PhysicsSendMethod":    {{Category: "Enum", Name: "PhysicsSendMethod"}},
-		"PrismSides":           {{Category: "Enum", Name: "PrismSides"}},
-		"PyramidSides":         {{Category: "Enum", Name: "PyramidSides"}},
+	types := &Types{
+		Map: map[string][]rbxapijson.Type{
+			// Replaced by "Class:<class>".
+			"Object": {{Category: "DataType", Name: "Object"}},
+			// Renamed to "CFrame".
+			"CoordinateFrame": {{Category: "DataType", Name: "CoordinateFrame"}},
+			// All references removed.
+			"SystemAddress":        {{Category: "DataType", Name: "SystemAddress"}},
+			"BuildPermission":      {{Category: "Enum", Name: "BuildPermission"}},
+			"PhysicsReceiveMethod": {{Category: "Enum", Name: "PhysicsReceiveMethod"}},
+			"PhysicsSendMethod":    {{Category: "Enum", Name: "PhysicsSendMethod"}},
+			"PrismSides":           {{Category: "Enum", Name: "PrismSides"}},
+			"PyramidSides":         {{Category: "Enum", Name: "PyramidSides"}},
+		},
 	}
-	var tmux sync.Mutex
 	typeVisitor := func(typ rbxapi.Type) {
-		tmux.Lock()
-		defer tmux.Unlock()
+		types.Lock()
+		defer types.Unlock()
 		cat := typ.GetCategory()
 		if cat == "" {
 			return
 		}
 		name := typ.GetName()
-		ts := types[name]
+		ts := types.Map[name]
 		for _, t := range ts {
 			if t.GetCategory() == cat {
 				return
 			}
 		}
-		types[name] = append(types[name], rbxapijson.Type{Category: typ.GetCategory(), Name: typ.GetName()})
+		types.Map[name] = append(types.Map[name], rbxapijson.Type{Category: typ.GetCategory(), Name: typ.GetName()})
 	}
 	VisitTypes(stable, typeVisitor)
 

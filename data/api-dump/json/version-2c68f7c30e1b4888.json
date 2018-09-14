@@ -86,7 +86,7 @@
 					"MemberType": "Property",
 					"Name": "Parent",
 					"ValueType": {
-						"Category": "Class",
+						"Category": "DataType",
 						"Name": "Object"
 					},
 					"Category": "Data",
@@ -2208,7 +2208,7 @@
 					"MemberType": "Property",
 					"Name": "Target",
 					"ValueType": {
-						"Category": "Class",
+						"Category": "DataType",
 						"Name": "Object"
 					},
 					"Category": "Goals",
@@ -2600,7 +2600,7 @@
 					"MemberType": "Property",
 					"Name": "CameraSubject",
 					"ValueType": {
-						"Category": "Class",
+						"Category": "DataType",
 						"Name": "Object"
 					},
 					"Category": "Camera",
@@ -4216,7 +4216,7 @@
 					"MemberType": "Property",
 					"Name": "Source",
 					"ValueType": {
-						"Category": "Class",
+						"Category": "DataType",
 						"Name": "Object"
 					},
 					"Category": "Data",
@@ -9762,7 +9762,7 @@
 					"MemberType": "Property",
 					"Name": "Adornee",
 					"ValueType": {
-						"Category": "Class",
+						"Category": "DataType",
 						"Name": "Object"
 					},
 					"Category": "Data",
@@ -9830,7 +9830,7 @@
 					"MemberType": "Property",
 					"Name": "PlayerToHideFrom",
 					"ValueType": {
-						"Category": "Class",
+						"Category": "DataType",
 						"Name": "Object"
 					},
 					"Category": "Data",
@@ -9937,7 +9937,7 @@
 					"MemberType": "Property",
 					"Name": "Adornee",
 					"ValueType": {
-						"Category": "Class",
+						"Category": "DataType",
 						"Name": "Object"
 					},
 					"Category": "Data",
@@ -10093,7 +10093,7 @@
 					"MemberType": "Property",
 					"Name": "From",
 					"ValueType": {
-						"Category": "Class",
+						"Category": "DataType",
 						"Name": "Object"
 					},
 					"Category": "Data",
@@ -10161,7 +10161,7 @@
 					"MemberType": "Property",
 					"Name": "To",
 					"ValueType": {
-						"Category": "Class",
+						"Category": "DataType",
 						"Name": "Object"
 					},
 					"Category": "Data",
@@ -10219,7 +10219,7 @@
 					"MemberType": "Property",
 					"Name": "Adornee",
 					"ValueType": {
-						"Category": "Class",
+						"Category": "DataType",
 						"Name": "Object"
 					},
 					"Category": "Data",
@@ -10252,7 +10252,7 @@
 					"MemberType": "Property",
 					"Name": "Adornee",
 					"ValueType": {
-						"Category": "Class",
+						"Category": "DataType",
 						"Name": "Object"
 					},
 					"Category": "Data",
@@ -10538,7 +10538,7 @@
 					"MemberType": "Property",
 					"Name": "Humanoid",
 					"ValueType": {
-						"Category": "Class",
+						"Category": "DataType",
 						"Name": "Object"
 					},
 					"Category": "Data",
@@ -10565,7 +10565,7 @@
 					"MemberType": "Property",
 					"Name": "Part",
 					"ValueType": {
-						"Category": "Class",
+						"Category": "DataType",
 						"Name": "Object"
 					},
 					"Category": "Data",
@@ -11746,7 +11746,7 @@
 					"MemberType": "Property",
 					"Name": "LeftLeg",
 					"ValueType": {
-						"Category": "Class",
+						"Category": "DataType",
 						"Name": "Object"
 					},
 					"Category": "Data",
@@ -11817,7 +11817,7 @@
 					"MemberType": "Property",
 					"Name": "RightLeg",
 					"ValueType": {
-						"Category": "Class",
+						"Category": "DataType",
 						"Name": "Object"
 					},
 					"Category": "Data",
@@ -11871,7 +11871,7 @@
 					"MemberType": "Property",
 					"Name": "Torso",
 					"ValueType": {
-						"Category": "Class",
+						"Category": "DataType",
 						"Name": "Object"
 					},
 					"Category": "Data",
@@ -11908,7 +11908,7 @@
 					"MemberType": "Property",
 					"Name": "WalkToPart",
 					"ValueType": {
-						"Category": "Class",
+						"Category": "DataType",
 						"Name": "Object"
 					},
 					"Category": "Control",
@@ -13249,7 +13249,7 @@
 					"MemberType": "Property",
 					"Name": "Part0",
 					"ValueType": {
-						"Category": "Class",
+						"Category": "DataType",
 						"Name": "Object"
 					},
 					"Category": "Data",
@@ -13266,7 +13266,7 @@
 					"MemberType": "Property",
 					"Name": "Part1",
 					"ValueType": {
-						"Category": "Class",
+						"Category": "DataType",
 						"Name": "Object"
 					},
 					"Category": "Data",
@@ -13283,7 +13283,7 @@
 					"MemberType": "Property",
 					"Name": "part1",
 					"ValueType": {
-						"Category": "Class",
+						"Category": "DataType",
 						"Name": "Object"
 					},
 					"Category": "Data",
@@ -13581,7 +13581,7 @@
 					"MemberType": "Property",
 					"Name": "Hole",
 					"ValueType": {
-						"Category": "Class",
+						"Category": "DataType",
 						"Name": "Object"
 					},
 					"Category": "Data",
@@ -13958,7 +13958,7 @@
 						}
 					],
 					"ReturnType": {
-						"Category": "Class",
+						"Category": "Group",
 						"Name": "Dictionary"
 					},
 					"Security": "None",
@@ -15256,7 +15256,7 @@
 					"MemberType": "Property",
 					"Name": "Target",
 					"ValueType": {
-						"Category": "Class",
+						"Category": "DataType",
 						"Name": "Object"
 					},
 					"Category": "Data",
@@ -15277,7 +15277,7 @@
 					"MemberType": "Property",
 					"Name": "TargetFilter",
 					"ValueType": {
-						"Category": "Class",
+						"Category": "DataType",
 						"Name": "Object"
 					},
 					"Category": "Data",
@@ -15443,7 +15443,7 @@
 					"MemberType": "Property",
 					"Name": "target",
 					"ValueType": {
-						"Category": "Class",
+						"Category": "DataType",
 						"Name": "Object"
 					},
 					"Category": "Data",
@@ -17170,7 +17170,7 @@
 					"MemberType": "Property",
 					"Name": "Value",
 					"ValueType": {
-						"Category": "Class",
+						"Category": "DataType",
 						"Name": "Object"
 					},
 					"Category": "Data",
@@ -18487,7 +18487,7 @@
 					"MemberType": "Property",
 					"Name": "Controller",
 					"ValueType": {
-						"Category": "Class",
+						"Category": "DataType",
 						"Name": "Object"
 					},
 					"Category": "Control",
@@ -18508,7 +18508,7 @@
 					"MemberType": "Property",
 					"Name": "ControllingHumanoid",
 					"ValueType": {
-						"Category": "Class",
+						"Category": "DataType",
 						"Name": "Object"
 					},
 					"Category": "Control",
@@ -19500,7 +19500,7 @@
 					"MemberType": "Property",
 					"Name": "PrimaryPart",
 					"ValueType": {
-						"Category": "Class",
+						"Category": "DataType",
 						"Name": "Object"
 					},
 					"Category": "Data",
@@ -19698,7 +19698,7 @@
 					"MemberType": "Property",
 					"Name": "CurrentCamera",
 					"ValueType": {
-						"Category": "Class",
+						"Category": "DataType",
 						"Name": "Object"
 					},
 					"Category": "Data",
@@ -19758,7 +19758,7 @@
 					"MemberType": "Property",
 					"Name": "Terrain",
 					"ValueType": {
-						"Category": "Class",
+						"Category": "DataType",
 						"Name": "Object"
 					},
 					"Category": "Behavior",
@@ -20735,7 +20735,7 @@
 					"MemberType": "Property",
 					"Name": "Character",
 					"ValueType": {
-						"Category": "Class",
+						"Category": "DataType",
 						"Name": "Object"
 					},
 					"Category": "Data",
@@ -22088,7 +22088,7 @@
 					"MemberType": "Property",
 					"Name": "LocalPlayer",
 					"ValueType": {
-						"Category": "Class",
+						"Category": "DataType",
 						"Name": "Object"
 					},
 					"Category": "Data",
@@ -22151,7 +22151,7 @@
 					"MemberType": "Property",
 					"Name": "localPlayer",
 					"ValueType": {
-						"Category": "Class",
+						"Category": "DataType",
 						"Name": "Object"
 					},
 					"Category": "Data",
@@ -24463,7 +24463,7 @@
 					"MemberType": "Property",
 					"Name": "Script",
 					"ValueType": {
-						"Category": "Class",
+						"Category": "DataType",
 						"Name": "Object"
 					},
 					"Category": "Data",
@@ -25266,7 +25266,7 @@
 					"MemberType": "Property",
 					"Name": "Workspace",
 					"ValueType": {
-						"Category": "Class",
+						"Category": "DataType",
 						"Name": "Object"
 					},
 					"Category": "Data",
@@ -25287,7 +25287,7 @@
 					"MemberType": "Property",
 					"Name": "lighting",
 					"ValueType": {
-						"Category": "Class",
+						"Category": "DataType",
 						"Name": "Object"
 					},
 					"Category": "Data",
@@ -25309,7 +25309,7 @@
 					"MemberType": "Property",
 					"Name": "workspace",
 					"ValueType": {
-						"Category": "Class",
+						"Category": "DataType",
 						"Name": "Object"
 					},
 					"Category": "Data",
@@ -26184,7 +26184,7 @@
 						}
 					],
 					"ReturnType": {
-						"Category": "Primitive",
+						"Category": "Group",
 						"Name": "Tuple"
 					},
 					"Security": "None",

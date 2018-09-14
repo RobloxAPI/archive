@@ -434,11 +434,11 @@ func main() {
 				return
 			}
 			root, err := rbxapidump.Decode(f)
+			f.Close()
 			if err != nil {
 				fmt.Println("failed to decode ", name, ":", err)
 				return
 			}
-			f.Close()
 
 			PreTransform(root, stable)
 			// In theory, every type in every build should be visited first,

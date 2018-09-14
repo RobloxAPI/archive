@@ -206,7 +206,7 @@ func PreTransform(root *rbxapidump.Root, first *rbxapijson.Root) {
 func transformType(dst *rbxapijson.Type, src *rbxapijson.Type, types *Types) {
 	// Try getting category from source.
 	if src != nil {
-		if dst.Category == "" {
+		if dst.Category == "" && src.Name == dst.Name {
 			dst.Category = src.Category
 		}
 	}

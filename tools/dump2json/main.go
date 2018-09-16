@@ -72,7 +72,7 @@ func VisitEnums(root rbxapi.Root, visit func(rbxapi.Enum)) {
 
 func VisitEnumItems(root rbxapi.Root, visit func(rbxapi.Enum, rbxapi.EnumItem)) {
 	for _, enum := range root.GetEnums() {
-		for _, item := range enum.GetItems() {
+		for _, item := range enum.GetEnumItems() {
 			visit(enum, item)
 		}
 	}
@@ -499,12 +499,12 @@ func main() {
 				// keeping around.
 				if enum, _ := jroot.GetEnum("KeyCode").(*rbxapijson.Enum); enum != nil {
 					foundKeypadEquals := false
-					for i := 0; i < len(enum.Items); i++ {
-						if enum.Items[i].Name == "KeypadEquals" {
+					for i := 0; i < len(enum.EnumItems); i++ {
+						if enum.EnumItems[i].Name == "KeypadEquals" {
 							if foundKeypadEquals {
-								copy(enum.Items[i:], enum.Items[i+1:])
-								enum.Items[len(enum.Items)-1] = nil
-								enum.Items = enum.Items[:len(enum.Items)-1]
+								copy(enum.EnumItems[i:], enum.EnumItems[i+1:])
+								enum.EnumItems[len(enum.EnumItems)-1] = nil
+								enum.EnumItems = enum.EnumItems[:len(enum.EnumItems)-1]
 								i--
 							} else {
 								foundKeypadEquals = true

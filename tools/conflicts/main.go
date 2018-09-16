@@ -134,7 +134,7 @@ func visitElements(conflicts *Conflicts, build *Build, root rbxapi.Root) {
 	enums := root.GetEnums()
 	conflicts.AppendEnum(build, enums)
 	for _, enum := range enums {
-		conflicts.AppendEnumItem(build, enum, enum.GetItems())
+		conflicts.AppendEnumItem(build, enum, enum.GetEnumItems())
 	}
 }
 

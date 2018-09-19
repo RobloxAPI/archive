@@ -499,12 +499,12 @@ func main() {
 				// keeping around.
 				if enum, _ := jroot.GetEnum("KeyCode").(*rbxapijson.Enum); enum != nil {
 					foundKeypadEquals := false
-					for i := 0; i < len(enum.EnumItems); i++ {
-						if enum.EnumItems[i].Name == "KeypadEquals" {
+					for i := 0; i < len(enum.Items); i++ {
+						if enum.Items[i].Name == "KeypadEquals" {
 							if foundKeypadEquals {
-								copy(enum.EnumItems[i:], enum.EnumItems[i+1:])
-								enum.EnumItems[len(enum.EnumItems)-1] = nil
-								enum.EnumItems = enum.EnumItems[:len(enum.EnumItems)-1]
+								copy(enum.Items[i:], enum.Items[i+1:])
+								enum.Items[len(enum.Items)-1] = nil
+								enum.Items = enum.Items[:len(enum.Items)-1]
 								i--
 							} else {
 								foundKeypadEquals = true

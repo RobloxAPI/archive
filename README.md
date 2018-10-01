@@ -8,7 +8,7 @@ Each subdirectory of the `data` directory contains a particular type of data.
 Each subdirectory within that contains the data in a particular format. Files
 are named by the version hash of the build they were derived from.
 
-	data/<type>/<version-hash>.<type>
+	data/<type>/<format>/<version-hash>.<format>
 
 Available types and formats are:
 

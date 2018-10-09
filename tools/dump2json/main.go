@@ -27,18 +27,18 @@ func VisitTypes(root rbxapi.Root, visit func(rbxapi.Type)) {
 				visit(member.GetValueType())
 			case "Function":
 				member := member.(rbxapi.Function)
-				for _, param := range member.GetParameters() {
+				for _, param := range member.GetParameters().GetParameters() {
 					visit(param.GetType())
 				}
 				visit(member.GetReturnType())
 			case "Event":
 				member := member.(rbxapi.Event)
-				for _, param := range member.GetParameters() {
+				for _, param := range member.GetParameters().GetParameters() {
 					visit(param.GetType())
 				}
 			case "Callback":
 				member := member.(rbxapi.Callback)
-				for _, param := range member.GetParameters() {
+				for _, param := range member.GetParameters().GetParameters() {
 					visit(param.GetType())
 				}
 				visit(member.GetReturnType())
@@ -154,10 +154,6 @@ func PreTransform(root *rbxapidump.Root, first *rbxapijson.Root) {
 			if class.Name == "Instance" && member.Name == "WaitForChild" {
 				member.SetTag("CanYield")
 			}
-		case *rbxapidump.YieldFunction:
-			member.SetTag("Yields")
-			member.Tags = renameTag(member.Tags, "notbrowsable", "NotBrowsable")
-			member.Tags = renameTag(member.Tags, "deprecated", "Deprecated")
 		case *rbxapidump.Event:
 			member.Tags = renameTag(member.Tags, "notbrowsable", "NotBrowsable")
 			member.Tags = renameTag(member.Tags, "deprecated", "Deprecated")

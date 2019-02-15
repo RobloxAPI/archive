@@ -299,6 +299,9 @@ func ResolveConflicts(root *rbxapidump.Root) {
 // Correct errors in translation of the current root, using the root of the next
 // build as a reference.
 func CorrectErrors(data *Data, correctors []interface{}) {
+	type RootCorrector interface {
+		Root(current, next *rbxapijson.Root)
+	}
 	type ClassCorrector interface {
 		Class(current, next *rbxapijson.Class)
 	}
@@ -322,6 +325,13 @@ func CorrectErrors(data *Data, correctors []interface{}) {
 	}
 
 	for _, corrector := range correctors {
+		if rootCorrector, ok := corrector.(RootCorrector); ok {
+			if data.Next != nil {
+				rootCorrector.Root(data.Root, data.Next.Root)
+			} else {
+				rootCorrector.Root(data.Root, nil)
+			}
+		}
 		if classCorrector, ok := corrector.(ClassCorrector); ok {
 			VisitClasses(data.Root, func(c rbxapi.Class) {
 				class := c.(*rbxapijson.Class)

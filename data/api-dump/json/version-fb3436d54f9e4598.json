@@ -22713,5 +22713,2684 @@
 			]
 		}
 	],
-	"Enums": null
+	"Enums": [
+		{
+			"Name": "MembershipType",
+			"Items": [
+				{
+					"Name": "None",
+					"Value": 0
+				},
+				{
+					"Name": "BuildersClub",
+					"Value": 1
+				},
+				{
+					"Name": "TurboBuildersClub",
+					"Value": 2
+				},
+				{
+					"Name": "OutrageousBuildersClub",
+					"Value": 3
+				}
+			]
+		},
+		{
+			"Name": "FriendStatus",
+			"Items": [
+				{
+					"Name": "Unknown",
+					"Value": 0
+				},
+				{
+					"Name": "NotFriend",
+					"Value": 1
+				},
+				{
+					"Name": "Friend",
+					"Value": 2
+				},
+				{
+					"Name": "FriendRequestSent",
+					"Value": 3
+				},
+				{
+					"Name": "FriendRequestReceived",
+					"Value": 4
+				}
+			]
+		},
+		{
+			"Name": "ChatMode",
+			"Items": [
+				{
+					"Name": "Menu",
+					"Value": 0
+				},
+				{
+					"Name": "TextAndMenu",
+					"Value": 1
+				}
+			]
+		},
+		{
+			"Name": "CameraMode",
+			"Items": [
+				{
+					"Name": "Classic",
+					"Value": 0
+				},
+				{
+					"Name": "LockFirstPerson",
+					"Value": 1
+				}
+			]
+		},
+		{
+			"Name": "PacketPriority",
+			"Items": [
+				{
+					"Name": "IMMEDIATE_PRIORITY",
+					"Value": 0
+				},
+				{
+					"Name": "HIGH_PRIORITY",
+					"Value": 1
+				},
+				{
+					"Name": "MEDIUM_PRIORITY",
+					"Value": 2
+				},
+				{
+					"Name": "LOW_PRIORITY",
+					"Value": 3
+				}
+			]
+		},
+		{
+			"Name": "PacketReliability",
+			"Items": [
+				{
+					"Name": "UNRELIABLE",
+					"Value": 0
+				},
+				{
+					"Name": "UNRELIABLE_SEQUENCED",
+					"Value": 1
+				},
+				{
+					"Name": "RELIABLE",
+					"Value": 2
+				},
+				{
+					"Name": "RELIABLE_ORDERED",
+					"Value": 3
+				},
+				{
+					"Name": "RELIABLE_SEQUENCED",
+					"Value": 4
+				}
+			]
+		},
+		{
+			"Name": "FilterResult",
+			"Items": [
+				{
+					"Name": "Rejected",
+					"Value": 1
+				},
+				{
+					"Name": "Accepted",
+					"Value": 0
+				}
+			]
+		},
+		{
+			"Name": "PlayerChatType",
+			"Items": [
+				{
+					"Name": "All",
+					"Value": 0
+				},
+				{
+					"Name": "Team",
+					"Value": 1
+				},
+				{
+					"Name": "Whisper",
+					"Value": 2
+				}
+			]
+		},
+		{
+			"Name": "ChatStyle",
+			"Items": [
+				{
+					"Name": "Classic",
+					"Value": 0
+				},
+				{
+					"Name": "Bubble",
+					"Value": 1
+				},
+				{
+					"Name": "ClassicAndBubble",
+					"Value": 2
+				}
+			]
+		},
+		{
+			"Name": "PhysicsSendMethod",
+			"Items": [
+				{
+					"Name": "ErrorComputation",
+					"Value": 0
+				},
+				{
+					"Name": "ErrorComputation2",
+					"Value": 1
+				},
+				{
+					"Name": "RoundRobin",
+					"Value": 2
+				},
+				{
+					"Name": "TopNErrors",
+					"Value": 3
+				}
+			]
+		},
+		{
+			"Name": "PhysicsReceiveMethod",
+			"Items": [
+				{
+					"Name": "Direct",
+					"Value": 0
+				},
+				{
+					"Name": "Interpolation",
+					"Value": 1
+				}
+			]
+		},
+		{
+			"Name": "FriendRequestEvent",
+			"Items": [
+				{
+					"Name": "Issue",
+					"Value": 0
+				},
+				{
+					"Name": "Revoke",
+					"Value": 1
+				},
+				{
+					"Name": "Accept",
+					"Value": 2
+				},
+				{
+					"Name": "Deny",
+					"Value": 3
+				}
+			]
+		},
+		{
+			"Name": "CreatorType",
+			"Items": [
+				{
+					"Name": "User",
+					"Value": 0
+				},
+				{
+					"Name": "Group",
+					"Value": 1
+				}
+			]
+		},
+		{
+			"Name": "Genre",
+			"Items": [
+				{
+					"Name": "All",
+					"Value": 0
+				},
+				{
+					"Name": "TownAndCity",
+					"Value": 1
+				},
+				{
+					"Name": "Fantasy",
+					"Value": 2
+				},
+				{
+					"Name": "SciFi",
+					"Value": 3
+				},
+				{
+					"Name": "Ninja",
+					"Value": 4
+				},
+				{
+					"Name": "Scary",
+					"Value": 5
+				},
+				{
+					"Name": "Pirate",
+					"Value": 6
+				},
+				{
+					"Name": "Adventure",
+					"Value": 7
+				},
+				{
+					"Name": "Sports",
+					"Value": 8
+				},
+				{
+					"Name": "Funny",
+					"Value": 9
+				},
+				{
+					"Name": "WildWest",
+					"Value": 10
+				},
+				{
+					"Name": "War",
+					"Value": 11
+				},
+				{
+					"Name": "SkatePark",
+					"Value": 12
+				},
+				{
+					"Name": "Tutorial",
+					"Value": 13
+				}
+			]
+		},
+		{
+			"Name": "GearGenreSetting",
+			"Items": [
+				{
+					"Name": "AllGenres",
+					"Value": 0
+				},
+				{
+					"Name": "MatchingGenreOnly",
+					"Value": 1
+				}
+			]
+		},
+		{
+			"Name": "GearType",
+			"Items": [
+				{
+					"Name": "MeleeWeapons",
+					"Value": 0
+				},
+				{
+					"Name": "RangedWeapons",
+					"Value": 1
+				},
+				{
+					"Name": "Explosives",
+					"Value": 2
+				},
+				{
+					"Name": "PowerUps",
+					"Value": 3
+				},
+				{
+					"Name": "NavigationEnhancers",
+					"Value": 4
+				},
+				{
+					"Name": "MusicalInstruments",
+					"Value": 5
+				},
+				{
+					"Name": "SocialItems",
+					"Value": 6
+				},
+				{
+					"Name": "BuildingTools",
+					"Value": 7
+				},
+				{
+					"Name": "Transport",
+					"Value": 8
+				}
+			]
+		},
+		{
+			"Name": "ErrorReporting",
+			"Items": [
+				{
+					"Name": "DontReport",
+					"Value": 0
+				},
+				{
+					"Name": "Prompt",
+					"Value": 1
+				},
+				{
+					"Name": "Report",
+					"Value": 2
+				}
+			]
+		},
+		{
+			"Name": "ThreadPoolConfig",
+			"Items": [
+				{
+					"Name": "Auto",
+					"Value": 0
+				},
+				{
+					"Name": "PerCore1",
+					"Value": 101
+				},
+				{
+					"Name": "PerCore2",
+					"Value": 102
+				},
+				{
+					"Name": "PerCore3",
+					"Value": 103
+				},
+				{
+					"Name": "PerCore4",
+					"Value": 104
+				},
+				{
+					"Name": "Threads1",
+					"Value": 1
+				},
+				{
+					"Name": "Threads2",
+					"Value": 2
+				},
+				{
+					"Name": "Threads3",
+					"Value": 3
+				},
+				{
+					"Name": "Threads4",
+					"Value": 4
+				},
+				{
+					"Name": "Threads8",
+					"Value": 8
+				},
+				{
+					"Name": "Threads16",
+					"Value": 16
+				}
+			]
+		},
+		{
+			"Name": "PriorityMethod",
+			"Items": [
+				{
+					"Name": "LastError",
+					"Value": 0
+				},
+				{
+					"Name": "AccumulatedError",
+					"Value": 1
+				},
+				{
+					"Name": "FIFO",
+					"Value": 2
+				}
+			]
+		},
+		{
+			"Name": "SleepAdjustMethod",
+			"Items": [
+				{
+					"Name": "None",
+					"Value": 0
+				},
+				{
+					"Name": "LastSample",
+					"Value": 1
+				},
+				{
+					"Name": "AverageInterval",
+					"Value": 2
+				}
+			]
+		},
+		{
+			"Name": "ConcurrencyModel",
+			"Items": [
+				{
+					"Name": "Serial",
+					"Value": 0
+				},
+				{
+					"Name": "Safe",
+					"Value": 1
+				},
+				{
+					"Name": "Logical",
+					"Value": 2
+				},
+				{
+					"Name": "Empirical",
+					"Value": 3
+				}
+			]
+		},
+		{
+			"Name": "TickCountSampleMethod",
+			"Items": [
+				{
+					"Name": "Fast",
+					"Value": 0
+				},
+				{
+					"Name": "Benchmark",
+					"Value": 1
+				},
+				{
+					"Name": "Precise",
+					"Value": 2
+				}
+			]
+		},
+		{
+			"Name": "CameraType",
+			"Items": [
+				{
+					"Name": "Fixed",
+					"Value": 0
+				},
+				{
+					"Name": "Watch",
+					"Value": 2
+				},
+				{
+					"Name": "Attach",
+					"Value": 1
+				},
+				{
+					"Name": "Track",
+					"Value": 3
+				},
+				{
+					"Name": "Follow",
+					"Value": 4
+				},
+				{
+					"Name": "Custom",
+					"Value": 5
+				},
+				{
+					"Name": "Scriptable",
+					"Value": 6
+				}
+			]
+		},
+		{
+			"Name": "FontSize",
+			"Items": [
+				{
+					"Name": "Size8",
+					"Value": 0
+				},
+				{
+					"Name": "Size9",
+					"Value": 1
+				},
+				{
+					"Name": "Size10",
+					"Value": 2
+				},
+				{
+					"Name": "Size11",
+					"Value": 3
+				},
+				{
+					"Name": "Size12",
+					"Value": 4
+				},
+				{
+					"Name": "Size14",
+					"Value": 5
+				},
+				{
+					"Name": "Size18",
+					"Value": 6
+				},
+				{
+					"Name": "Size24",
+					"Value": 7
+				},
+				{
+					"Name": "Size36",
+					"Value": 8
+				},
+				{
+					"Name": "Size48",
+					"Value": 9
+				}
+			]
+		},
+		{
+			"Name": "Font",
+			"Items": [
+				{
+					"Name": "Legacy",
+					"Value": 0
+				},
+				{
+					"Name": "Arial",
+					"Value": 1
+				},
+				{
+					"Name": "ArialBold",
+					"Value": 2
+				}
+			]
+		},
+		{
+			"Name": "TextXAlignment",
+			"Items": [
+				{
+					"Name": "Left",
+					"Value": 0
+				},
+				{
+					"Name": "Center",
+					"Value": 2
+				},
+				{
+					"Name": "Right",
+					"Value": 1
+				}
+			]
+		},
+		{
+			"Name": "TextYAlignment",
+			"Items": [
+				{
+					"Name": "Top",
+					"Value": 0
+				},
+				{
+					"Name": "Center",
+					"Value": 1
+				},
+				{
+					"Name": "Bottom",
+					"Value": 2
+				}
+			]
+		},
+		{
+			"Name": "FrameStyle",
+			"Items": [
+				{
+					"Name": "Custom",
+					"Value": 0
+				},
+				{
+					"Name": "ChatBlue",
+					"Value": 1
+				},
+				{
+					"Name": "RobloxSquare",
+					"Value": 2
+				},
+				{
+					"Name": "RobloxRound",
+					"Value": 3
+				},
+				{
+					"Name": "ChatGreen",
+					"Value": 4
+				},
+				{
+					"Name": "ChatRed",
+					"Value": 5
+				}
+			]
+		},
+		{
+			"Name": "SpecialKey",
+			"Items": [
+				{
+					"Name": "Insert",
+					"Value": 0
+				},
+				{
+					"Name": "Home",
+					"Value": 1
+				},
+				{
+					"Name": "End",
+					"Value": 2
+				},
+				{
+					"Name": "PageUp",
+					"Value": 3
+				},
+				{
+					"Name": "PageDown",
+					"Value": 4
+				},
+				{
+					"Name": "ChatHotkey",
+					"Value": 5
+				}
+			]
+		},
+		{
+			"Name": "CenterDialogType",
+			"Items": [
+				{
+					"Name": "UnsolicitedDialog",
+					"Value": 1
+				},
+				{
+					"Name": "PlayerInitiatedDialog",
+					"Value": 2
+				},
+				{
+					"Name": "ModalDialog",
+					"Value": 3
+				},
+				{
+					"Name": "QuitDialog",
+					"Value": 4
+				}
+			]
+		},
+		{
+			"Name": "ReverbType",
+			"Items": [
+				{
+					"Name": "NoReverb",
+					"Value": 0
+				},
+				{
+					"Name": "GenericReverb",
+					"Value": 1
+				},
+				{
+					"Name": "PaddedCell",
+					"Value": 2
+				},
+				{
+					"Name": "Room",
+					"Value": 3
+				},
+				{
+					"Name": "Bathroom",
+					"Value": 4
+				},
+				{
+					"Name": "LivingRoom",
+					"Value": 5
+				},
+				{
+					"Name": "StoneRoom",
+					"Value": 6
+				},
+				{
+					"Name": "Auditorium",
+					"Value": 7
+				},
+				{
+					"Name": "ConcertHall",
+					"Value": 8
+				},
+				{
+					"Name": "Cave",
+					"Value": 9
+				},
+				{
+					"Name": "Arena",
+					"Value": 10
+				},
+				{
+					"Name": "Hangar",
+					"Value": 11
+				},
+				{
+					"Name": "CarpettedHallway",
+					"Value": 12
+				},
+				{
+					"Name": "Hallway",
+					"Value": 13
+				},
+				{
+					"Name": "StoneCorridor",
+					"Value": 14
+				},
+				{
+					"Name": "Alley",
+					"Value": 15
+				},
+				{
+					"Name": "Forest",
+					"Value": 16
+				},
+				{
+					"Name": "City",
+					"Value": 17
+				},
+				{
+					"Name": "Mountains",
+					"Value": 18
+				},
+				{
+					"Name": "Quarry",
+					"Value": 19
+				},
+				{
+					"Name": "Plain",
+					"Value": 20
+				},
+				{
+					"Name": "ParkingLot",
+					"Value": 21
+				},
+				{
+					"Name": "SewerPipe",
+					"Value": 22
+				},
+				{
+					"Name": "UnderWater",
+					"Value": 23
+				}
+			]
+		},
+		{
+			"Name": "SoundType",
+			"Items": [
+				{
+					"Name": "NoSound",
+					"Value": 0
+				},
+				{
+					"Name": "Boing",
+					"Value": 1
+				},
+				{
+					"Name": "Bomb",
+					"Value": 2
+				},
+				{
+					"Name": "Break",
+					"Value": 3
+				},
+				{
+					"Name": "Click",
+					"Value": 4
+				},
+				{
+					"Name": "Clock",
+					"Value": 5
+				},
+				{
+					"Name": "Slingshot",
+					"Value": 6
+				},
+				{
+					"Name": "Page",
+					"Value": 7
+				},
+				{
+					"Name": "Ping",
+					"Value": 8
+				},
+				{
+					"Name": "Snap",
+					"Value": 9
+				},
+				{
+					"Name": "Splat",
+					"Value": 10
+				},
+				{
+					"Name": "Step",
+					"Value": 11
+				},
+				{
+					"Name": "StepOn",
+					"Value": 12
+				},
+				{
+					"Name": "Swoosh",
+					"Value": 13
+				},
+				{
+					"Name": "Victory",
+					"Value": 14
+				}
+			]
+		},
+		{
+			"Name": "VideoQualitySettings",
+			"Items": [
+				{
+					"Name": "LowResolution",
+					"Value": 0
+				},
+				{
+					"Name": "MediumResolution",
+					"Value": 1
+				},
+				{
+					"Name": "HighResolution",
+					"Value": 2
+				}
+			]
+		},
+		{
+			"Name": "UploadSetting",
+			"Items": [
+				{
+					"Name": "Never",
+					"Value": 0
+				},
+				{
+					"Name": "Ask",
+					"Value": 1
+				},
+				{
+					"Name": "Always",
+					"Value": 2
+				}
+			]
+		},
+		{
+			"Name": "ControlMode",
+			"Items": [
+				{
+					"Name": "MouseLockSwitch",
+					"Value": 1
+				},
+				{
+					"Name": "Classic",
+					"Value": 0
+				}
+			]
+		},
+		{
+			"Name": "SavedQualitySetting",
+			"Items": [
+				{
+					"Name": "Automatic",
+					"Value": 0
+				},
+				{
+					"Name": "QualityLevel1",
+					"Value": 1
+				},
+				{
+					"Name": "QualityLevel2",
+					"Value": 2
+				},
+				{
+					"Name": "QualityLevel3",
+					"Value": 3
+				},
+				{
+					"Name": "QualityLevel4",
+					"Value": 4
+				},
+				{
+					"Name": "QualityLevel5",
+					"Value": 5
+				},
+				{
+					"Name": "QualityLevel6",
+					"Value": 6
+				},
+				{
+					"Name": "QualityLevel7",
+					"Value": 7
+				},
+				{
+					"Name": "QualityLevel8",
+					"Value": 8
+				},
+				{
+					"Name": "QualityLevel9",
+					"Value": 9
+				},
+				{
+					"Name": "QualityLevel10",
+					"Value": 10
+				}
+			]
+		},
+		{
+			"Name": "Material",
+			"Items": [
+				{
+					"Name": "Plastic",
+					"Value": 256
+				},
+				{
+					"Name": "Wood",
+					"Value": 512
+				},
+				{
+					"Name": "Slate",
+					"Value": 800
+				},
+				{
+					"Name": "Concrete",
+					"Value": 816
+				},
+				{
+					"Name": "CorrodedMetal",
+					"Value": 1040
+				},
+				{
+					"Name": "DiamondPlate",
+					"Value": 1056
+				},
+				{
+					"Name": "Foil",
+					"Value": 1072
+				},
+				{
+					"Name": "Grass",
+					"Value": 1280
+				},
+				{
+					"Name": "Ice",
+					"Value": 1536
+				}
+			]
+		},
+		{
+			"Name": "NormalId",
+			"Items": [
+				{
+					"Name": "Top",
+					"Value": 1
+				},
+				{
+					"Name": "Bottom",
+					"Value": 4
+				},
+				{
+					"Name": "Back",
+					"Value": 2
+				},
+				{
+					"Name": "Front",
+					"Value": 5
+				},
+				{
+					"Name": "Right",
+					"Value": 0
+				},
+				{
+					"Name": "Left",
+					"Value": 3
+				}
+			]
+		},
+		{
+			"Name": "BinType",
+			"Items": [
+				{
+					"Name": "Script",
+					"Value": 0
+				},
+				{
+					"Name": "GameTool",
+					"Value": 1
+				},
+				{
+					"Name": "Grab",
+					"Value": 2
+				},
+				{
+					"Name": "Clone",
+					"Value": 3
+				},
+				{
+					"Name": "Hammer",
+					"Value": 4
+				}
+			]
+		},
+		{
+			"Name": "Status",
+			"Items": [
+				{
+					"Name": "Poison",
+					"Value": 0
+				},
+				{
+					"Name": "Confusion",
+					"Value": 1
+				}
+			]
+		},
+		{
+			"Name": "NameOcclusion",
+			"Items": [
+				{
+					"Name": "OccludeAll",
+					"Value": 2
+				},
+				{
+					"Name": "EnemyOcclusion",
+					"Value": 1
+				},
+				{
+					"Name": "NoOcclusion",
+					"Value": 0
+				}
+			]
+		},
+		{
+			"Name": "Button",
+			"Items": [
+				{
+					"Name": "Jump",
+					"Value": 32
+				},
+				{
+					"Name": "Dismount",
+					"Value": 8
+				}
+			]
+		},
+		{
+			"Name": "Style",
+			"Items": [
+				{
+					"Name": "AlternatingSupports",
+					"Value": 0
+				},
+				{
+					"Name": "BridgeStyleSupports",
+					"Value": 1
+				},
+				{
+					"Name": "NoSupports",
+					"Value": 2
+				}
+			]
+		},
+		{
+			"Name": "MeshType",
+			"Items": [
+				{
+					"Name": "Head",
+					"Value": 0
+				},
+				{
+					"Name": "Torso",
+					"Value": 1
+				},
+				{
+					"Name": "Wedge",
+					"Value": 2
+				},
+				{
+					"Name": "Prism",
+					"Value": 7
+				},
+				{
+					"Name": "Pyramid",
+					"Value": 8
+				},
+				{
+					"Name": "ParallelRamp",
+					"Value": 9
+				},
+				{
+					"Name": "RightAngleRamp",
+					"Value": 10
+				},
+				{
+					"Name": "CornerWedge",
+					"Value": 11
+				},
+				{
+					"Name": "Brick",
+					"Value": 6
+				},
+				{
+					"Name": "Sphere",
+					"Value": 3
+				},
+				{
+					"Name": "Cylinder",
+					"Value": 4
+				},
+				{
+					"Name": "FileMesh",
+					"Value": 5
+				}
+			]
+		},
+		{
+			"Name": "FormFactor",
+			"Items": [
+				{
+					"Name": "Symmetric",
+					"Value": 0
+				},
+				{
+					"Name": "Brick",
+					"Value": 1
+				},
+				{
+					"Name": "Plate",
+					"Value": 2
+				},
+				{
+					"Name": "Custom",
+					"Value": 3
+				}
+			]
+		},
+		{
+			"Name": "PartType",
+			"Items": [
+				{
+					"Name": "Ball",
+					"Value": 0
+				},
+				{
+					"Name": "Block",
+					"Value": 1
+				},
+				{
+					"Name": "Cylinder",
+					"Value": 2
+				}
+			]
+		},
+		{
+			"Name": "CellMaterial",
+			"Items": [
+				{
+					"Name": "Empty",
+					"Value": 0
+				},
+				{
+					"Name": "Grass",
+					"Value": 1
+				},
+				{
+					"Name": "Sand",
+					"Value": 2
+				},
+				{
+					"Name": "Brick",
+					"Value": 3
+				},
+				{
+					"Name": "Granite",
+					"Value": 4
+				},
+				{
+					"Name": "Asphalt",
+					"Value": 5
+				},
+				{
+					"Name": "Iron",
+					"Value": 6
+				},
+				{
+					"Name": "Aluminum",
+					"Value": 7
+				},
+				{
+					"Name": "Gold",
+					"Value": 8
+				},
+				{
+					"Name": "WoodPlank",
+					"Value": 9
+				},
+				{
+					"Name": "WoodLog",
+					"Value": 10
+				},
+				{
+					"Name": "Gravel",
+					"Value": 11
+				},
+				{
+					"Name": "CinderBlock",
+					"Value": 12
+				},
+				{
+					"Name": "MossyStone",
+					"Value": 13
+				},
+				{
+					"Name": "Cement",
+					"Value": 14
+				},
+				{
+					"Name": "RedPlastic",
+					"Value": 15
+				},
+				{
+					"Name": "BluePlastic",
+					"Value": 16
+				},
+				{
+					"Name": "Water",
+					"Value": 17
+				}
+			]
+		},
+		{
+			"Name": "CellBlock",
+			"Items": [
+				{
+					"Name": "Solid",
+					"Value": 0
+				},
+				{
+					"Name": "VerticalWedge",
+					"Value": 1
+				},
+				{
+					"Name": "CornerWedge",
+					"Value": 2
+				},
+				{
+					"Name": "InverseCornerWedge",
+					"Value": 3
+				},
+				{
+					"Name": "HorizontalWedge",
+					"Value": 4
+				}
+			]
+		},
+		{
+			"Name": "CellOrientation",
+			"Items": [
+				{
+					"Name": "NegZ",
+					"Value": 0
+				},
+				{
+					"Name": "X",
+					"Value": 1
+				},
+				{
+					"Name": "Z",
+					"Value": 2
+				},
+				{
+					"Name": "NegX",
+					"Value": 3
+				}
+			]
+		},
+		{
+			"Name": "WaterForce",
+			"Items": [
+				{
+					"Name": "None",
+					"Value": 0
+				},
+				{
+					"Name": "Small",
+					"Value": 1
+				},
+				{
+					"Name": "Medium",
+					"Value": 2
+				},
+				{
+					"Name": "Strong",
+					"Value": 3
+				},
+				{
+					"Name": "Max",
+					"Value": 4
+				}
+			]
+		},
+		{
+			"Name": "WaterDirection",
+			"Items": [
+				{
+					"Name": "NegX",
+					"Value": 0
+				},
+				{
+					"Name": "X",
+					"Value": 1
+				},
+				{
+					"Name": "NegY",
+					"Value": 2
+				},
+				{
+					"Name": "Y",
+					"Value": 3
+				},
+				{
+					"Name": "NegZ",
+					"Value": 4
+				},
+				{
+					"Name": "Z",
+					"Value": 5
+				}
+			]
+		},
+		{
+			"Name": "LevelOfDetailSetting",
+			"Items": [
+				{
+					"Name": "High",
+					"Value": 2
+				},
+				{
+					"Name": "Medium",
+					"Value": 1
+				},
+				{
+					"Name": "Low",
+					"Value": 0
+				}
+			]
+		},
+		{
+			"Name": "BodyPart",
+			"Items": [
+				{
+					"Name": "Head",
+					"Value": 0
+				},
+				{
+					"Name": "Torso",
+					"Value": 1
+				},
+				{
+					"Name": "LeftArm",
+					"Value": 2
+				},
+				{
+					"Name": "RightArm",
+					"Value": 3
+				},
+				{
+					"Name": "LeftLeg",
+					"Value": 4
+				},
+				{
+					"Name": "RightLeg",
+					"Value": 5
+				}
+			]
+		},
+		{
+			"Name": "RuntimeUndoBehavior",
+			"Items": [
+				{
+					"Name": "Aggregate",
+					"Value": 0
+				},
+				{
+					"Name": "Snapshot",
+					"Value": 1
+				},
+				{
+					"Name": "Hybrid",
+					"Value": 2
+				}
+			]
+		},
+		{
+			"Name": "FunctionalTestResult",
+			"Items": [
+				{
+					"Name": "Passed",
+					"Value": 0
+				},
+				{
+					"Name": "Warning",
+					"Value": 1
+				},
+				{
+					"Name": "Error",
+					"Value": 2
+				}
+			]
+		},
+		{
+			"Name": "ActionType",
+			"Items": [
+				{
+					"Name": "Nothing",
+					"Value": 0
+				},
+				{
+					"Name": "Pause",
+					"Value": 1
+				},
+				{
+					"Name": "Lose",
+					"Value": 2
+				},
+				{
+					"Name": "Draw",
+					"Value": 3
+				},
+				{
+					"Name": "Win",
+					"Value": 4
+				}
+			]
+		},
+		{
+			"Name": "SizeConstraint",
+			"Items": [
+				{
+					"Name": "RelativeXY",
+					"Value": 0
+				},
+				{
+					"Name": "RelativeXX",
+					"Value": 1
+				},
+				{
+					"Name": "RelativeYY",
+					"Value": 2
+				}
+			]
+		},
+		{
+			"Name": "EasingStyle",
+			"Items": [
+				{
+					"Name": "Linear",
+					"Value": 0
+				},
+				{
+					"Name": "Sine",
+					"Value": 1
+				},
+				{
+					"Name": "Back",
+					"Value": 2
+				},
+				{
+					"Name": "Quad",
+					"Value": 3
+				},
+				{
+					"Name": "Quart",
+					"Value": 4
+				},
+				{
+					"Name": "Quint",
+					"Value": 5
+				},
+				{
+					"Name": "Bounce",
+					"Value": 6
+				},
+				{
+					"Name": "Elastic",
+					"Value": 7
+				}
+			]
+		},
+		{
+			"Name": "TweenStatus",
+			"Items": [
+				{
+					"Name": "Canceled",
+					"Value": 0
+				},
+				{
+					"Name": "Completed",
+					"Value": 1
+				}
+			]
+		},
+		{
+			"Name": "EasingDirection",
+			"Items": [
+				{
+					"Name": "In",
+					"Value": 0
+				},
+				{
+					"Name": "Out",
+					"Value": 1
+				},
+				{
+					"Name": "InOut",
+					"Value": 2
+				}
+			]
+		},
+		{
+			"Name": "InputType",
+			"Items": [
+				{
+					"Name": "NoInput",
+					"Value": 0
+				},
+				{
+					"Name": "LeftTread",
+					"Value": 1
+				},
+				{
+					"Name": "RightTread",
+					"Value": 2
+				},
+				{
+					"Name": "Steer",
+					"Value": 3
+				},
+				{
+					"Name": "Throtle",
+					"Value": 4
+				},
+				{
+					"Name": "UpDown",
+					"Value": 6
+				},
+				{
+					"Name": "Action1",
+					"Value": 7
+				},
+				{
+					"Name": "Action2",
+					"Value": 8
+				},
+				{
+					"Name": "Action3",
+					"Value": 9
+				},
+				{
+					"Name": "Action4",
+					"Value": 10
+				},
+				{
+					"Name": "Action5",
+					"Value": 11
+				},
+				{
+					"Name": "Constant",
+					"Value": 12
+				},
+				{
+					"Name": "Sin",
+					"Value": 13
+				}
+			]
+		},
+		{
+			"Name": "EnviromentalPhysicsThrottle",
+			"Items": [
+				{
+					"Name": "DefaultAuto",
+					"Value": 0
+				},
+				{
+					"Name": "Disabled",
+					"Value": 1
+				},
+				{
+					"Name": "Always",
+					"Value": 2
+				},
+				{
+					"Name": "Skip2",
+					"Value": 3
+				},
+				{
+					"Name": "Skip4",
+					"Value": 4
+				},
+				{
+					"Name": "Skip8",
+					"Value": 5
+				},
+				{
+					"Name": "Skip16",
+					"Value": 6
+				}
+			]
+		},
+		{
+			"Name": "InOut",
+			"Items": [
+				{
+					"Name": "Edge",
+					"Value": 0
+				},
+				{
+					"Name": "Inset",
+					"Value": 1
+				},
+				{
+					"Name": "Center",
+					"Value": 2
+				}
+			]
+		},
+		{
+			"Name": "LeftRight",
+			"Items": [
+				{
+					"Name": "Left",
+					"Value": 0
+				},
+				{
+					"Name": "Center",
+					"Value": 1
+				},
+				{
+					"Name": "Right",
+					"Value": 2
+				}
+			]
+		},
+		{
+			"Name": "TopBottom",
+			"Items": [
+				{
+					"Name": "Top",
+					"Value": 0
+				},
+				{
+					"Name": "Center",
+					"Value": 1
+				},
+				{
+					"Name": "Bottom",
+					"Value": 2
+				}
+			]
+		},
+		{
+			"Name": "JointType",
+			"Items": [
+				{
+					"Name": "None",
+					"Value": 13
+				},
+				{
+					"Name": "Rotate",
+					"Value": 6
+				},
+				{
+					"Name": "RotateP",
+					"Value": 7
+				},
+				{
+					"Name": "RotateV",
+					"Value": 8
+				},
+				{
+					"Name": "Glue",
+					"Value": 9
+				},
+				{
+					"Name": "Weld",
+					"Value": 1
+				},
+				{
+					"Name": "Snap",
+					"Value": 3
+				}
+			]
+		},
+		{
+			"Name": "KeywordFilterType",
+			"Items": [
+				{
+					"Name": "Include",
+					"Value": 0
+				},
+				{
+					"Name": "Exclude",
+					"Value": 1
+				}
+			]
+		},
+		{
+			"Name": "SurfaceConstraint",
+			"Items": [
+				{
+					"Name": "None",
+					"Value": 0
+				},
+				{
+					"Name": "Hinge",
+					"Value": 1
+				},
+				{
+					"Name": "SteppingMotor",
+					"Value": 2
+				},
+				{
+					"Name": "Motor",
+					"Value": 3
+				}
+			]
+		},
+		{
+			"Name": "Axis",
+			"Items": [
+				{
+					"Name": "X",
+					"Value": 0
+				},
+				{
+					"Name": "Y",
+					"Value": 1
+				},
+				{
+					"Name": "Z",
+					"Value": 2
+				}
+			]
+		},
+		{
+			"Name": "AnimationPriority",
+			"Items": [
+				{
+					"Name": "Idle",
+					"Value": 0
+				},
+				{
+					"Name": "Movement",
+					"Value": 1
+				},
+				{
+					"Name": "Action",
+					"Value": 2
+				}
+			]
+		},
+		{
+			"Name": "Stuff",
+			"Items": [
+				{
+					"Name": "Heads",
+					"Value": 0
+				},
+				{
+					"Name": "Faces",
+					"Value": 1
+				},
+				{
+					"Name": "Hats",
+					"Value": 2
+				},
+				{
+					"Name": "TShirts",
+					"Value": 3
+				},
+				{
+					"Name": "Shirts",
+					"Value": 4
+				},
+				{
+					"Name": "Pants",
+					"Value": 5
+				},
+				{
+					"Name": "Gears",
+					"Value": 6
+				},
+				{
+					"Name": "Torsos",
+					"Value": 7
+				},
+				{
+					"Name": "LeftArms",
+					"Value": 8
+				},
+				{
+					"Name": "RightArms",
+					"Value": 9
+				},
+				{
+					"Name": "LeftLegs",
+					"Value": 10
+				},
+				{
+					"Name": "RightLegs",
+					"Value": 11
+				},
+				{
+					"Name": "Bodies",
+					"Value": 12
+				},
+				{
+					"Name": "Costumes",
+					"Value": 13
+				}
+			]
+		},
+		{
+			"Name": "PrivilegeType",
+			"Items": [
+				{
+					"Name": "Owner",
+					"Value": 255
+				},
+				{
+					"Name": "Admin",
+					"Value": 240
+				},
+				{
+					"Name": "Member",
+					"Value": 128
+				},
+				{
+					"Name": "Visitor",
+					"Value": 10
+				},
+				{
+					"Name": "Banned",
+					"Value": 0
+				}
+			]
+		},
+		{
+			"Name": "PrismSides",
+			"Items": [
+				{
+					"Name": "3",
+					"Value": 3
+				},
+				{
+					"Name": "5",
+					"Value": 5
+				},
+				{
+					"Name": "6",
+					"Value": 6
+				},
+				{
+					"Name": "8",
+					"Value": 8
+				},
+				{
+					"Name": "10",
+					"Value": 10
+				},
+				{
+					"Name": "20",
+					"Value": 20
+				}
+			]
+		},
+		{
+			"Name": "PyramidSides",
+			"Items": [
+				{
+					"Name": "3",
+					"Value": 3
+				},
+				{
+					"Name": "4",
+					"Value": 4
+				},
+				{
+					"Name": "5",
+					"Value": 5
+				},
+				{
+					"Name": "6",
+					"Value": 6
+				},
+				{
+					"Name": "8",
+					"Value": 8
+				},
+				{
+					"Name": "10",
+					"Value": 10
+				},
+				{
+					"Name": "20",
+					"Value": 20
+				}
+			]
+		},
+		{
+			"Name": "HandlesStyle",
+			"Items": [
+				{
+					"Name": "Resize",
+					"Value": 0
+				},
+				{
+					"Name": "Movement",
+					"Value": 1
+				}
+			]
+		},
+		{
+			"Name": "MoveState",
+			"Items": [
+				{
+					"Name": "Stopped",
+					"Value": 0
+				},
+				{
+					"Name": "Coasting",
+					"Value": 1
+				},
+				{
+					"Name": "Pushing",
+					"Value": 2
+				},
+				{
+					"Name": "Stopping",
+					"Value": 3
+				},
+				{
+					"Name": "AirFree",
+					"Value": 4
+				}
+			]
+		},
+		{
+			"Name": "SurfaceType",
+			"Items": [
+				{
+					"Name": "Smooth",
+					"Value": 0
+				},
+				{
+					"Name": "Glue",
+					"Value": 1
+				},
+				{
+					"Name": "Weld",
+					"Value": 2
+				},
+				{
+					"Name": "Studs",
+					"Value": 3
+				},
+				{
+					"Name": "Inlet",
+					"Value": 4
+				},
+				{
+					"Name": "Universal",
+					"Value": 5
+				},
+				{
+					"Name": "Hinge",
+					"Value": 6
+				},
+				{
+					"Name": "Motor",
+					"Value": 7
+				},
+				{
+					"Name": "SteppingMotor",
+					"Value": 8
+				},
+				{
+					"Name": "Unjoinable",
+					"Value": 9
+				}
+			]
+		},
+		{
+			"Name": "ChatColor",
+			"Items": [
+				{
+					"Name": "Blue",
+					"Value": 0
+				},
+				{
+					"Name": "Green",
+					"Value": 1
+				},
+				{
+					"Name": "Red",
+					"Value": 2
+				}
+			]
+		},
+		{
+			"Name": "ButtonStyle",
+			"Items": [
+				{
+					"Name": "Custom",
+					"Value": 0
+				},
+				{
+					"Name": "RobloxButtonDefault",
+					"Value": 1
+				},
+				{
+					"Name": "RobloxButton",
+					"Value": 2
+				}
+			]
+		},
+		{
+			"Name": "DialogPurpose",
+			"Items": [
+				{
+					"Name": "Quest",
+					"Value": 0
+				},
+				{
+					"Name": "Help",
+					"Value": 1
+				},
+				{
+					"Name": "Shop",
+					"Value": 2
+				}
+			]
+		},
+		{
+			"Name": "DialogTone",
+			"Items": [
+				{
+					"Name": "Neutral",
+					"Value": 0
+				},
+				{
+					"Name": "Friendly",
+					"Value": 1
+				},
+				{
+					"Name": "Enemy",
+					"Value": 2
+				}
+			]
+		},
+		{
+			"Name": "ExplosionType",
+			"Items": [
+				{
+					"Name": "NoCraters",
+					"Value": 0
+				},
+				{
+					"Name": "Craters",
+					"Value": 1
+				},
+				{
+					"Name": "CratersAndDebris",
+					"Value": 2
+				}
+			]
+		},
+		{
+			"Name": "D3DFORMAT",
+			"Items": [
+				{
+					"Name": "D3DFMT_UNKNOWN",
+					"Value": 0
+				},
+				{
+					"Name": "D3DFMT_R8G8B8",
+					"Value": 20
+				},
+				{
+					"Name": "D3DFMT_A8R8G8B8",
+					"Value": 21
+				},
+				{
+					"Name": "D3DFMT_X8R8G8B8",
+					"Value": 22
+				},
+				{
+					"Name": "D3DFMT_R5G6B5",
+					"Value": 23
+				},
+				{
+					"Name": "D3DFMT_X1R5G5B5",
+					"Value": 24
+				},
+				{
+					"Name": "D3DFMT_A1R5G5B5",
+					"Value": 25
+				},
+				{
+					"Name": "D3DFMT_A4R4G4B4",
+					"Value": 26
+				},
+				{
+					"Name": "D3DFMT_R3G3B2",
+					"Value": 27
+				},
+				{
+					"Name": "D3DFMT_A8",
+					"Value": 28
+				},
+				{
+					"Name": "D3DFMT_A8R3G3B2",
+					"Value": 29
+				},
+				{
+					"Name": "D3DFMT_X4R4G4B4",
+					"Value": 30
+				},
+				{
+					"Name": "D3DFMT_A2B10G10R10",
+					"Value": 31
+				},
+				{
+					"Name": "D3DFMT_A8B8G8R8",
+					"Value": 32
+				},
+				{
+					"Name": "D3DFMT_X8B8G8R8",
+					"Value": 33
+				},
+				{
+					"Name": "D3DFMT_G16R16",
+					"Value": 34
+				},
+				{
+					"Name": "D3DFMT_A2R10G10B10",
+					"Value": 35
+				},
+				{
+					"Name": "D3DFMT_A16B16G16R16",
+					"Value": 36
+				},
+				{
+					"Name": "D3DFMT_A8P8",
+					"Value": 40
+				},
+				{
+					"Name": "D3DFMT_P8",
+					"Value": 41
+				},
+				{
+					"Name": "D3DFMT_L8",
+					"Value": 50
+				},
+				{
+					"Name": "D3DFMT_A8L8",
+					"Value": 51
+				},
+				{
+					"Name": "D3DFMT_A4L4",
+					"Value": 52
+				},
+				{
+					"Name": "D3DFMT_V8U8",
+					"Value": 60
+				},
+				{
+					"Name": "D3DFMT_L6V5U5",
+					"Value": 61
+				},
+				{
+					"Name": "D3DFMT_X8L8V8U8",
+					"Value": 62
+				},
+				{
+					"Name": "D3DFMT_Q8W8V8U8",
+					"Value": 63
+				},
+				{
+					"Name": "D3DFMT_V16U16",
+					"Value": 64
+				},
+				{
+					"Name": "D3DFMT_A2W10V10U10",
+					"Value": 67
+				},
+				{
+					"Name": "D3DFMT_D16_LOCKABLE",
+					"Value": 70
+				},
+				{
+					"Name": "D3DFMT_D32",
+					"Value": 71
+				},
+				{
+					"Name": "D3DFMT_D15S1",
+					"Value": 73
+				},
+				{
+					"Name": "D3DFMT_D24S8",
+					"Value": 75
+				},
+				{
+					"Name": "D3DFMT_D24X8",
+					"Value": 77
+				},
+				{
+					"Name": "D3DFMT_D24X4S4",
+					"Value": 79
+				},
+				{
+					"Name": "D3DFMT_D16",
+					"Value": 80
+				},
+				{
+					"Name": "D3DFMT_D32F_LOCKABLE",
+					"Value": 82
+				},
+				{
+					"Name": "D3DFMT_D24FS8",
+					"Value": 83
+				},
+				{
+					"Name": "D3DFMT_L16",
+					"Value": 81
+				},
+				{
+					"Name": "D3DFMT_VERTEXDATA",
+					"Value": 100
+				},
+				{
+					"Name": "D3DFMT_INDEX16",
+					"Value": 101
+				},
+				{
+					"Name": "D3DFMT_INDEX32",
+					"Value": 102
+				},
+				{
+					"Name": "D3DFMT_Q16W16V16U16",
+					"Value": 110
+				},
+				{
+					"Name": "D3DFMT_R16F",
+					"Value": 111
+				},
+				{
+					"Name": "D3DFMT_G16R16F",
+					"Value": 112
+				},
+				{
+					"Name": "D3DFMT_A16B16G16R16F",
+					"Value": 113
+				},
+				{
+					"Name": "D3DFMT_R32F",
+					"Value": 114
+				},
+				{
+					"Name": "D3DFMT_G32R32F",
+					"Value": 115
+				},
+				{
+					"Name": "D3DFMT_A32B32G32R32F",
+					"Value": 116
+				},
+				{
+					"Name": "D3DFMT_CxV8U8",
+					"Value": 117
+				}
+			]
+		},
+		{
+			"Name": "D3DDEVTYPE",
+			"Items": [
+				{
+					"Name": "D3DDEVTYPE_HAL",
+					"Value": 1
+				},
+				{
+					"Name": "D3DDEVTYPE_REF",
+					"Value": 2
+				},
+				{
+					"Name": "D3DDEVTYPE_SW",
+					"Value": 3
+				},
+				{
+					"Name": "D3DDEVTYPE_NULLREF",
+					"Value": 4
+				}
+			]
+		},
+		{
+			"Name": "AASamples",
+			"Items": [
+				{
+					"Name": "None",
+					"Value": 1
+				},
+				{
+					"Name": "4",
+					"Value": 4
+				},
+				{
+					"Name": "8",
+					"Value": 8
+				}
+			]
+		},
+		{
+			"Name": "GraphicsMode",
+			"Items": [
+				{
+					"Name": "Automatic",
+					"Value": 1
+				},
+				{
+					"Name": "Direct3D",
+					"Value": 3
+				},
+				{
+					"Name": "OpenGL",
+					"Value": 4
+				},
+				{
+					"Name": "NoGraphics",
+					"Value": 5
+				}
+			]
+		},
+		{
+			"Name": "FramerateManagerMode",
+			"Items": [
+				{
+					"Name": "Automatic",
+					"Value": 0
+				},
+				{
+					"Name": "On",
+					"Value": 1
+				},
+				{
+					"Name": "Off",
+					"Value": 2
+				}
+			]
+		},
+		{
+			"Name": "Bevels",
+			"Items": [
+				{
+					"Name": "Automatic",
+					"Value": 0
+				},
+				{
+					"Name": "On",
+					"Value": 1
+				},
+				{
+					"Name": "Off",
+					"Value": 2
+				}
+			]
+		},
+		{
+			"Name": "Antialiasing",
+			"Items": [
+				{
+					"Name": "Automatic",
+					"Value": 0
+				},
+				{
+					"Name": "Off",
+					"Value": 2
+				},
+				{
+					"Name": "On",
+					"Value": 1
+				}
+			]
+		},
+		{
+			"Name": "GeometryQuality",
+			"Items": [
+				{
+					"Name": "Automatic",
+					"Value": 0
+				},
+				{
+					"Name": "High",
+					"Value": 3
+				},
+				{
+					"Name": "Medium",
+					"Value": 2
+				},
+				{
+					"Name": "Low",
+					"Value": 1
+				}
+			]
+		},
+		{
+			"Name": "QualityLevel",
+			"Items": [
+				{
+					"Name": "Automatic",
+					"Value": 0
+				},
+				{
+					"Name": "Level01",
+					"Value": 1
+				},
+				{
+					"Name": "Level02",
+					"Value": 2
+				},
+				{
+					"Name": "Level03",
+					"Value": 3
+				},
+				{
+					"Name": "Level04",
+					"Value": 4
+				},
+				{
+					"Name": "Level05",
+					"Value": 5
+				},
+				{
+					"Name": "Level06",
+					"Value": 6
+				},
+				{
+					"Name": "Level07",
+					"Value": 7
+				},
+				{
+					"Name": "Level08",
+					"Value": 8
+				},
+				{
+					"Name": "Level09",
+					"Value": 9
+				},
+				{
+					"Name": "Level10",
+					"Value": 10
+				},
+				{
+					"Name": "Level11",
+					"Value": 11
+				},
+				{
+					"Name": "Level12",
+					"Value": 12
+				},
+				{
+					"Name": "Level13",
+					"Value": 13
+				},
+				{
+					"Name": "Level14",
+					"Value": 14
+				},
+				{
+					"Name": "Level15",
+					"Value": 15
+				},
+				{
+					"Name": "Level16",
+					"Value": 16
+				},
+				{
+					"Name": "Level17",
+					"Value": 17
+				},
+				{
+					"Name": "Level18",
+					"Value": 18
+				},
+				{
+					"Name": "Level19",
+					"Value": 19
+				},
+				{
+					"Name": "Level20",
+					"Value": 20
+				},
+				{
+					"Name": "Level21",
+					"Value": 21
+				}
+			]
+		},
+		{
+			"Name": "MaterialQuality",
+			"Items": [
+				{
+					"Name": "Automatic",
+					"Value": 0
+				},
+				{
+					"Name": "Low",
+					"Value": 1
+				},
+				{
+					"Name": "Medium",
+					"Value": 2
+				},
+				{
+					"Name": "High",
+					"Value": 3
+				}
+			]
+		},
+		{
+			"Name": "Resolution",
+			"Items": [
+				{
+					"Name": "Automatic",
+					"Value": 0
+				},
+				{
+					"Name": "720x526",
+					"Value": 1
+				},
+				{
+					"Name": "800x600",
+					"Value": 2
+				},
+				{
+					"Name": "1024x600",
+					"Value": 3
+				},
+				{
+					"Name": "1024x768",
+					"Value": 4
+				},
+				{
+					"Name": "1280x720",
+					"Value": 5
+				},
+				{
+					"Name": "1280x768",
+					"Value": 6
+				},
+				{
+					"Name": "1152x864",
+					"Value": 7
+				},
+				{
+					"Name": "1280x800",
+					"Value": 8
+				},
+				{
+					"Name": "1360x768",
+					"Value": 9
+				},
+				{
+					"Name": "1280x960",
+					"Value": 10
+				},
+				{
+					"Name": "1280x1024",
+					"Value": 11
+				},
+				{
+					"Name": "1440x900",
+					"Value": 12
+				},
+				{
+					"Name": "1600x900",
+					"Value": 13
+				},
+				{
+					"Name": "1600x1024",
+					"Value": 14
+				},
+				{
+					"Name": "1600x1200",
+					"Value": 15
+				},
+				{
+					"Name": "1680x1050",
+					"Value": 16
+				},
+				{
+					"Name": "1920x1080",
+					"Value": 17
+				},
+				{
+					"Name": "1920x1200",
+					"Value": 18
+				}
+			]
+		},
+		{
+			"Name": "Shadow",
+			"Items": [
+				{
+					"Name": "Automatic",
+					"Value": 0
+				},
+				{
+					"Name": "All",
+					"Value": 1
+				},
+				{
+					"Name": "CharacterOnly",
+					"Value": 3
+				},
+				{
+					"Name": "Off",
+					"Value": 2
+				}
+			]
+		}
+	]
 }

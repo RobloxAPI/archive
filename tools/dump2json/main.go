@@ -455,6 +455,16 @@ type TypeCorrector struct {
 	Types Types
 }
 
+func (c TypeCorrector) Root(current, next *rbxapijson.Root) {
+	// Backport missing enum list.
+	if len(current.Enums) == 0 {
+		// TODO: Filter out enums that are not referred to by type.
+		current.Enums = make([]*rbxapijson.Enum, len(next.Enums))
+		for i, enum := range next.Enums {
+			current.Enums[i] = enum.Copy().(*rbxapijson.Enum)
+		}
+	}
+}
 func (c TypeCorrector) Property(current, next *rbxapijson.Property) {
 	if next != nil {
 		c.Types.TransformType(&current.ValueType, &next.ValueType)

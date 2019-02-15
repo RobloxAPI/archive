@@ -13866,10 +13866,7 @@
 						"Category": "Primitive",
 						"Name": "float"
 					},
-					"Security": "None",
-					"Tags": [
-						"CustomLuaState"
-					]
+					"Security": "None"
 				},
 				{
 					"MemberType": "Function",
@@ -17329,10 +17326,7 @@
 						"Category": "Class",
 						"Name": "Instance"
 					},
-					"Security": "LocalUserSecurity",
-					"Tags": [
-						"CustomLuaState"
-					]
+					"Security": "LocalUserSecurity"
 				}
 			],
 			"Tags": [

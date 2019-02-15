@@ -357,10 +357,7 @@
 						"Category": "Group",
 						"Name": "Array"
 					},
-					"Security": "None",
-					"Tags": [
-						"CustomLuaState"
-					]
+					"Security": "None"
 				},
 				{
 					"MemberType": "Function",
@@ -482,7 +479,6 @@
 					},
 					"Security": "None",
 					"Tags": [
-						"CustomLuaState",
 						"CanYield"
 					]
 				},
@@ -25967,10 +25963,7 @@
 						"Category": "Primitive",
 						"Name": "float"
 					},
-					"Security": "None",
-					"Tags": [
-						"CustomLuaState"
-					]
+					"Security": "None"
 				},
 				{
 					"MemberType": "Function",
@@ -26122,8 +26115,7 @@
 					},
 					"Security": "None",
 					"Tags": [
-						"Deprecated",
-						"CustomLuaState"
+						"Deprecated"
 					]
 				},
 				{
@@ -27437,10 +27429,7 @@
 						"Category": "Group",
 						"Name": "Tuple"
 					},
-					"Security": "None",
-					"Tags": [
-						"CustomLuaState"
-					]
+					"Security": "None"
 				},
 				{
 					"MemberType": "Function",
@@ -27705,10 +27694,7 @@
 						"Category": "Primitive",
 						"Name": "void"
 					},
-					"Security": "None",
-					"Tags": [
-						"CustomLuaState"
-					]
+					"Security": "None"
 				}
 			],
 			"Tags": [
@@ -33541,10 +33527,7 @@
 						"Category": "Class",
 						"Name": "Instance"
 					},
-					"Security": "PluginSecurity",
-					"Tags": [
-						"CustomLuaState"
-					]
+					"Security": "PluginSecurity"
 				},
 				{
 					"MemberType": "Function",

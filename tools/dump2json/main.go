@@ -482,16 +482,17 @@ type FieldCorrector struct{}
 
 func (c FieldCorrector) Class(current, next *rbxapijson.Class) {
 	if next != nil {
-		// if current.Superclass == "" {
-		// 	current.Superclass = next.Superclass
-		// }
-		if current.Name == "Instance" {
-			current.Superclass = "<<<ROOT>>>"
+		if current.Superclass == "" {
+			current.Superclass = next.Superclass
 		}
 		current.MemoryCategory = next.MemoryCategory
 	} else {
-		if current.Superclass == "" {
-			but.Logf("class %s missing Superclass due to removal\n", current.Name)
+		if current.Superclass == "" && current.Name != "<<<ROOT>>>" {
+			// This applies to instances that where removed before superclasses
+			// were exposed in the dump. Besides ROOT, which doesn't have a
+			// superclass, the only other class that meets this condition is
+			// PseudoPlayer, which is presumed to have inherited from Instance.
+			current.Superclass = "Instance"
 		}
 	}
 }

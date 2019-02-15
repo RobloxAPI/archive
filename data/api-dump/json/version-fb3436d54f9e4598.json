@@ -511,7 +511,7 @@
 		},
 		{
 			"Name": "Accoutrement",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -598,19 +598,19 @@
 		},
 		{
 			"Name": "Hat",
-			"Superclass": "",
+			"Superclass": "Accoutrement",
 			"MemoryCategory": "Instances",
 			"Members": []
 		},
 		{
 			"Name": "AdvancedDragger",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "Instances",
 			"Members": []
 		},
 		{
 			"Name": "Animation",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "Animation",
 			"Members": [
 				{
@@ -637,7 +637,7 @@
 		},
 		{
 			"Name": "AnimationTrack",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "Animation",
 			"Members": [
 				{
@@ -771,13 +771,13 @@
 		},
 		{
 			"Name": "AnimationTrackState",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "",
 			"Members": []
 		},
 		{
 			"Name": "Animator",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -802,7 +802,7 @@
 		},
 		{
 			"Name": "Authoring",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "",
 			"Members": [
 				{
@@ -911,7 +911,7 @@
 		},
 		{
 			"Name": "BadgeService",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -1128,7 +1128,7 @@
 		},
 		{
 			"Name": "BasePlayerGui",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "Instances",
 			"Members": [],
 			"Tags": [
@@ -1137,7 +1137,7 @@
 		},
 		{
 			"Name": "CoreGui",
-			"Superclass": "",
+			"Superclass": "BasePlayerGui",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -1172,7 +1172,7 @@
 		},
 		{
 			"Name": "PlayerGui",
-			"Superclass": "",
+			"Superclass": "BasePlayerGui",
 			"MemoryCategory": "Instances",
 			"Members": [],
 			"Tags": [
@@ -1183,7 +1183,7 @@
 		},
 		{
 			"Name": "StarterGui",
-			"Superclass": "",
+			"Superclass": "BasePlayerGui",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -1212,7 +1212,7 @@
 		},
 		{
 			"Name": "BaseScript",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "Script",
 			"Members": [
 				{
@@ -1256,7 +1256,7 @@
 		},
 		{
 			"Name": "CoreScript",
-			"Superclass": "",
+			"Superclass": "BaseScript",
 			"MemoryCategory": "Instances",
 			"Members": [],
 			"Tags": [
@@ -1266,7 +1266,7 @@
 		},
 		{
 			"Name": "StarterScript",
-			"Superclass": "",
+			"Superclass": "CoreScript",
 			"MemoryCategory": "",
 			"Members": [],
 			"Tags": [
@@ -1275,7 +1275,7 @@
 		},
 		{
 			"Name": "Script",
-			"Superclass": "",
+			"Superclass": "BaseScript",
 			"MemoryCategory": "Script",
 			"Members": [
 				{
@@ -1309,13 +1309,13 @@
 		},
 		{
 			"Name": "LocalScript",
-			"Superclass": "",
+			"Superclass": "Script",
 			"MemoryCategory": "Script",
 			"Members": []
 		},
 		{
 			"Name": "BodyMover",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "Instances",
 			"Members": [],
 			"Tags": [
@@ -1324,7 +1324,7 @@
 		},
 		{
 			"Name": "BodyAngularVelocity",
-			"Superclass": "",
+			"Superclass": "BodyMover",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -1388,7 +1388,7 @@
 		},
 		{
 			"Name": "BodyForce",
-			"Superclass": "",
+			"Superclass": "BodyMover",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -1415,7 +1415,7 @@
 		},
 		{
 			"Name": "BodyGyro",
-			"Superclass": "",
+			"Superclass": "BodyMover",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -1496,7 +1496,7 @@
 		},
 		{
 			"Name": "BodyPosition",
-			"Superclass": "",
+			"Superclass": "BodyMover",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -1597,7 +1597,7 @@
 		},
 		{
 			"Name": "BodyThrust",
-			"Superclass": "",
+			"Superclass": "BodyMover",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -1644,7 +1644,7 @@
 		},
 		{
 			"Name": "BodyVelocity",
-			"Superclass": "",
+			"Superclass": "BodyMover",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -1728,7 +1728,7 @@
 		},
 		{
 			"Name": "RocketPropulsion",
-			"Superclass": "",
+			"Superclass": "BodyMover",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -1951,7 +1951,7 @@
 		},
 		{
 			"Name": "BoolValue",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -1989,7 +1989,7 @@
 		},
 		{
 			"Name": "BrickColorValue",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -2027,7 +2027,7 @@
 		},
 		{
 			"Name": "Button",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -2061,7 +2061,7 @@
 		},
 		{
 			"Name": "CFrameValue",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -2099,7 +2099,7 @@
 		},
 		{
 			"Name": "Camera",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -2234,7 +2234,7 @@
 		},
 		{
 			"Name": "ChangeHistoryService",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -2331,7 +2331,7 @@
 		},
 		{
 			"Name": "CharacterAppearance",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "Instances",
 			"Members": [],
 			"Tags": [
@@ -2340,7 +2340,7 @@
 		},
 		{
 			"Name": "BodyColors",
-			"Superclass": "",
+			"Superclass": "CharacterAppearance",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -2452,7 +2452,7 @@
 		},
 		{
 			"Name": "CharacterMesh",
-			"Superclass": "",
+			"Superclass": "CharacterAppearance",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -2530,7 +2530,7 @@
 		},
 		{
 			"Name": "Clothing",
-			"Superclass": "",
+			"Superclass": "CharacterAppearance",
 			"MemoryCategory": "Instances",
 			"Members": [],
 			"Tags": [
@@ -2539,7 +2539,7 @@
 		},
 		{
 			"Name": "Pants",
-			"Superclass": "",
+			"Superclass": "Clothing",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -2563,7 +2563,7 @@
 		},
 		{
 			"Name": "Shirt",
-			"Superclass": "",
+			"Superclass": "Clothing",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -2587,7 +2587,7 @@
 		},
 		{
 			"Name": "ShirtGraphic",
-			"Superclass": "",
+			"Superclass": "CharacterAppearance",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -2611,7 +2611,7 @@
 		},
 		{
 			"Name": "Skin",
-			"Superclass": "",
+			"Superclass": "CharacterAppearance",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -2638,7 +2638,7 @@
 		},
 		{
 			"Name": "Chat",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -2711,7 +2711,7 @@
 		},
 		{
 			"Name": "ClickDetector",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -2777,7 +2777,7 @@
 		},
 		{
 			"Name": "CollectionService",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -2834,7 +2834,7 @@
 		},
 		{
 			"Name": "Color3Value",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -2872,7 +2872,7 @@
 		},
 		{
 			"Name": "Configuration",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "Instances",
 			"Members": [],
 			"Tags": [
@@ -2881,7 +2881,7 @@
 		},
 		{
 			"Name": "ContentFilter",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "",
 			"Members": [
 				{
@@ -2931,7 +2931,7 @@
 		},
 		{
 			"Name": "ContentProvider",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -3095,7 +3095,7 @@
 		},
 		{
 			"Name": "Controller",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -3180,13 +3180,13 @@
 		},
 		{
 			"Name": "HumanoidController",
-			"Superclass": "",
+			"Superclass": "Controller",
 			"MemoryCategory": "Instances",
 			"Members": []
 		},
 		{
 			"Name": "SkateboardController",
-			"Superclass": "",
+			"Superclass": "Controller",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -3249,13 +3249,13 @@
 		},
 		{
 			"Name": "VehicleController",
-			"Superclass": "",
+			"Superclass": "Controller",
 			"MemoryCategory": "Instances",
 			"Members": []
 		},
 		{
 			"Name": "ControllerService",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "Instances",
 			"Members": [],
 			"Tags": [
@@ -3266,7 +3266,7 @@
 		},
 		{
 			"Name": "CookiesService",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -3338,7 +3338,7 @@
 		},
 		{
 			"Name": "CustomEvent",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -3404,7 +3404,7 @@
 		},
 		{
 			"Name": "CustomEventReceiver",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -3483,7 +3483,7 @@
 		},
 		{
 			"Name": "DataModelMesh",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -3546,7 +3546,7 @@
 		},
 		{
 			"Name": "BevelMesh",
-			"Superclass": "",
+			"Superclass": "DataModelMesh",
 			"MemoryCategory": "Instances",
 			"Members": [],
 			"Tags": [
@@ -3557,7 +3557,7 @@
 		},
 		{
 			"Name": "BlockMesh",
-			"Superclass": "",
+			"Superclass": "BevelMesh",
 			"MemoryCategory": "PhysicsParts",
 			"Members": [],
 			"Tags": [
@@ -3566,7 +3566,7 @@
 		},
 		{
 			"Name": "CylinderMesh",
-			"Superclass": "",
+			"Superclass": "BevelMesh",
 			"MemoryCategory": "PhysicsParts",
 			"Members": [],
 			"Tags": [
@@ -3575,7 +3575,7 @@
 		},
 		{
 			"Name": "FileMesh",
-			"Superclass": "",
+			"Superclass": "DataModelMesh",
 			"MemoryCategory": "PhysicsParts",
 			"Members": [
 				{
@@ -3619,7 +3619,7 @@
 		},
 		{
 			"Name": "SpecialMesh",
-			"Superclass": "",
+			"Superclass": "FileMesh",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -3643,7 +3643,7 @@
 		},
 		{
 			"Name": "Debris",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -3747,7 +3747,7 @@
 		},
 		{
 			"Name": "DebugSettings",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -4814,7 +4814,7 @@
 		},
 		{
 			"Name": "Dialog",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -4955,7 +4955,7 @@
 		},
 		{
 			"Name": "DialogChoice",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -4999,7 +4999,7 @@
 		},
 		{
 			"Name": "DoubleConstrainedValue",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -5095,7 +5095,7 @@
 		},
 		{
 			"Name": "Dragger",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -5181,7 +5181,7 @@
 		},
 		{
 			"Name": "Explosion",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -5260,7 +5260,7 @@
 		},
 		{
 			"Name": "FaceInstance",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -5288,7 +5288,7 @@
 		},
 		{
 			"Name": "Decal",
-			"Superclass": "",
+			"Superclass": "FaceInstance",
 			"MemoryCategory": "GraphicsTexture",
 			"Members": [
 				{
@@ -5369,7 +5369,7 @@
 		},
 		{
 			"Name": "Texture",
-			"Superclass": "",
+			"Superclass": "Decal",
 			"MemoryCategory": "GraphicsTexture",
 			"Members": [
 				{
@@ -5410,7 +5410,7 @@
 		},
 		{
 			"Name": "FastLogSettings",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "",
 			"Members": [
 				{
@@ -5485,7 +5485,7 @@
 		},
 		{
 			"Name": "Feature",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -5563,7 +5563,7 @@
 		},
 		{
 			"Name": "Hole",
-			"Superclass": "",
+			"Superclass": "Feature",
 			"MemoryCategory": "Instances",
 			"Members": [],
 			"Tags": [
@@ -5572,13 +5572,13 @@
 		},
 		{
 			"Name": "MotorFeature",
-			"Superclass": "",
+			"Superclass": "Feature",
 			"MemoryCategory": "Instances",
 			"Members": []
 		},
 		{
 			"Name": "Fire",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -5676,7 +5676,7 @@
 		},
 		{
 			"Name": "FlagStandService",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "Instances",
 			"Members": [],
 			"Tags": [
@@ -5686,13 +5686,13 @@
 		},
 		{
 			"Name": "ForceField",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "Instances",
 			"Members": []
 		},
 		{
 			"Name": "FriendService",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -5811,7 +5811,7 @@
 		},
 		{
 			"Name": "FunctionalTest",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -6022,7 +6022,7 @@
 		},
 		{
 			"Name": "GameSettings",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -6280,7 +6280,7 @@
 		},
 		{
 			"Name": "Geometry",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "Instances",
 			"Members": [],
 			"Tags": [
@@ -6290,7 +6290,7 @@
 		},
 		{
 			"Name": "GuiBase",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -6340,7 +6340,7 @@
 		},
 		{
 			"Name": "BillboardGui",
-			"Superclass": "",
+			"Superclass": "GuiBase",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -6486,7 +6486,7 @@
 		},
 		{
 			"Name": "GuiObject",
-			"Superclass": "",
+			"Superclass": "GuiBase",
 			"MemoryCategory": "Gui",
 			"Members": [
 				{
@@ -7045,7 +7045,7 @@
 		},
 		{
 			"Name": "Frame",
-			"Superclass": "",
+			"Superclass": "GuiObject",
 			"MemoryCategory": "Gui",
 			"Members": [
 				{
@@ -7072,7 +7072,7 @@
 		},
 		{
 			"Name": "NotificationObject",
-			"Superclass": "",
+			"Superclass": "Frame",
 			"MemoryCategory": "",
 			"Members": [],
 			"Tags": [
@@ -7082,7 +7082,7 @@
 		},
 		{
 			"Name": "GuiButton",
-			"Superclass": "",
+			"Superclass": "GuiObject",
 			"MemoryCategory": "Gui",
 			"Members": [
 				{
@@ -7274,7 +7274,7 @@
 		},
 		{
 			"Name": "ImageButton",
-			"Superclass": "",
+			"Superclass": "GuiButton",
 			"MemoryCategory": "Gui",
 			"Members": [
 				{
@@ -7301,7 +7301,7 @@
 		},
 		{
 			"Name": "TextButton",
-			"Superclass": "",
+			"Superclass": "GuiButton",
 			"MemoryCategory": "Gui",
 			"Members": [
 				{
@@ -7551,7 +7551,7 @@
 		},
 		{
 			"Name": "GuiLabel",
-			"Superclass": "",
+			"Superclass": "GuiObject",
 			"MemoryCategory": "Gui",
 			"Members": [],
 			"Tags": [
@@ -7560,7 +7560,7 @@
 		},
 		{
 			"Name": "ImageLabel",
-			"Superclass": "",
+			"Superclass": "GuiLabel",
 			"MemoryCategory": "Gui",
 			"Members": [
 				{
@@ -7587,7 +7587,7 @@
 		},
 		{
 			"Name": "TextLabel",
-			"Superclass": "",
+			"Superclass": "GuiLabel",
 			"MemoryCategory": "Gui",
 			"Members": [
 				{
@@ -7837,7 +7837,7 @@
 		},
 		{
 			"Name": "NotificationBox",
-			"Superclass": "",
+			"Superclass": "GuiObject",
 			"MemoryCategory": "",
 			"Members": [],
 			"Tags": [
@@ -7847,7 +7847,7 @@
 		},
 		{
 			"Name": "Scale9Frame",
-			"Superclass": "",
+			"Superclass": "GuiObject",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -7891,7 +7891,7 @@
 		},
 		{
 			"Name": "TextBox",
-			"Superclass": "",
+			"Superclass": "GuiObject",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -8199,7 +8199,7 @@
 		},
 		{
 			"Name": "ScreenGui",
-			"Superclass": "",
+			"Superclass": "GuiBase",
 			"MemoryCategory": "Instances",
 			"Members": [],
 			"Tags": [
@@ -8208,7 +8208,7 @@
 		},
 		{
 			"Name": "GuiMain",
-			"Superclass": "",
+			"Superclass": "ScreenGui",
 			"MemoryCategory": "Instances",
 			"Members": [],
 			"Tags": [
@@ -8217,7 +8217,7 @@
 		},
 		{
 			"Name": "GuiBase3d",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -8281,7 +8281,7 @@
 		},
 		{
 			"Name": "FloorWire",
-			"Superclass": "",
+			"Superclass": "GuiBase3d",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -8427,7 +8427,7 @@
 		},
 		{
 			"Name": "PVAdornment",
-			"Superclass": "",
+			"Superclass": "GuiBase3d",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -8454,7 +8454,7 @@
 		},
 		{
 			"Name": "SelectionBox",
-			"Superclass": "",
+			"Superclass": "PVAdornment",
 			"MemoryCategory": "Instances",
 			"Members": [],
 			"Tags": [
@@ -8463,7 +8463,7 @@
 		},
 		{
 			"Name": "PartAdornment",
-			"Superclass": "",
+			"Superclass": "GuiBase3d",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -8490,7 +8490,7 @@
 		},
 		{
 			"Name": "HandlesBase",
-			"Superclass": "",
+			"Superclass": "PartAdornment",
 			"MemoryCategory": "Instances",
 			"Members": [],
 			"Tags": [
@@ -8499,7 +8499,7 @@
 		},
 		{
 			"Name": "ArcHandles",
-			"Superclass": "",
+			"Superclass": "HandlesBase",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -8610,7 +8610,7 @@
 		},
 		{
 			"Name": "Handles",
-			"Superclass": "",
+			"Superclass": "HandlesBase",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -8731,7 +8731,7 @@
 		},
 		{
 			"Name": "SurfaceSelection",
-			"Superclass": "",
+			"Superclass": "PartAdornment",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -8758,7 +8758,7 @@
 		},
 		{
 			"Name": "SelectionLasso",
-			"Superclass": "",
+			"Superclass": "GuiBase3d",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -8785,7 +8785,7 @@
 		},
 		{
 			"Name": "SelectionPartLasso",
-			"Superclass": "",
+			"Superclass": "SelectionLasso",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -8812,7 +8812,7 @@
 		},
 		{
 			"Name": "SelectionPointLasso",
-			"Superclass": "",
+			"Superclass": "SelectionLasso",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -8839,7 +8839,7 @@
 		},
 		{
 			"Name": "TextureTrail",
-			"Superclass": "",
+			"Superclass": "GuiBase3d",
 			"MemoryCategory": "",
 			"Members": [
 				{
@@ -8968,7 +8968,7 @@
 		},
 		{
 			"Name": "GuiItem",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "Instances",
 			"Members": [],
 			"Tags": [
@@ -8977,13 +8977,13 @@
 		},
 		{
 			"Name": "Backpack",
-			"Superclass": "",
+			"Superclass": "GuiItem",
 			"MemoryCategory": "Instances",
 			"Members": []
 		},
 		{
 			"Name": "BackpackItem",
-			"Superclass": "",
+			"Superclass": "GuiItem",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -9010,7 +9010,7 @@
 		},
 		{
 			"Name": "HopperBin",
-			"Superclass": "",
+			"Superclass": "BackpackItem",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -9091,7 +9091,7 @@
 		},
 		{
 			"Name": "Tool",
-			"Superclass": "",
+			"Superclass": "BackpackItem",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -9227,7 +9227,7 @@
 		},
 		{
 			"Name": "Flag",
-			"Superclass": "",
+			"Superclass": "Tool",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -9251,7 +9251,7 @@
 		},
 		{
 			"Name": "ButtonBindingWidget",
-			"Superclass": "",
+			"Superclass": "GuiItem",
 			"MemoryCategory": "Instances",
 			"Members": [],
 			"Tags": [
@@ -9260,7 +9260,7 @@
 		},
 		{
 			"Name": "GuiRoot",
-			"Superclass": "",
+			"Superclass": "GuiItem",
 			"MemoryCategory": "Instances",
 			"Members": [],
 			"Tags": [
@@ -9270,7 +9270,7 @@
 		},
 		{
 			"Name": "Hopper",
-			"Superclass": "",
+			"Superclass": "GuiItem",
 			"MemoryCategory": "Instances",
 			"Members": [],
 			"Tags": [
@@ -9281,7 +9281,7 @@
 		},
 		{
 			"Name": "LocalBackpack",
-			"Superclass": "",
+			"Superclass": "GuiItem",
 			"MemoryCategory": "",
 			"Members": [
 				{
@@ -9319,13 +9319,13 @@
 		},
 		{
 			"Name": "PlayerHUD",
-			"Superclass": "",
+			"Superclass": "GuiItem",
 			"MemoryCategory": "",
 			"Members": []
 		},
 		{
 			"Name": "StarterPack",
-			"Superclass": "",
+			"Superclass": "GuiItem",
 			"MemoryCategory": "Instances",
 			"Members": [],
 			"Tags": [
@@ -9335,7 +9335,7 @@
 		},
 		{
 			"Name": "GuiService",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -9617,7 +9617,7 @@
 		},
 		{
 			"Name": "GuidRegistryService",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "Instances",
 			"Members": [],
 			"Tags": [
@@ -9627,7 +9627,7 @@
 		},
 		{
 			"Name": "Humanoid",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -10261,7 +10261,7 @@
 		},
 		{
 			"Name": "InsertService",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -10720,7 +10720,7 @@
 		},
 		{
 			"Name": "InstancePacketCache",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "Instances",
 			"Members": [],
 			"Tags": [
@@ -10731,7 +10731,7 @@
 		},
 		{
 			"Name": "IntConstrainedValue",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -10827,7 +10827,7 @@
 		},
 		{
 			"Name": "IntValue",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -10865,7 +10865,7 @@
 		},
 		{
 			"Name": "JointInstance",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "PhysicsParts",
 			"Members": [
 				{
@@ -10943,7 +10943,7 @@
 		},
 		{
 			"Name": "DynamicRotate",
-			"Superclass": "",
+			"Superclass": "JointInstance",
 			"MemoryCategory": "PhysicsParts",
 			"Members": [
 				{
@@ -10970,19 +10970,19 @@
 		},
 		{
 			"Name": "RotateP",
-			"Superclass": "",
+			"Superclass": "DynamicRotate",
 			"MemoryCategory": "PhysicsParts",
 			"Members": []
 		},
 		{
 			"Name": "RotateV",
-			"Superclass": "",
+			"Superclass": "DynamicRotate",
 			"MemoryCategory": "PhysicsParts",
 			"Members": []
 		},
 		{
 			"Name": "Glue",
-			"Superclass": "",
+			"Superclass": "JointInstance",
 			"MemoryCategory": "PhysicsParts",
 			"Members": [
 				{
@@ -11057,7 +11057,7 @@
 		},
 		{
 			"Name": "ManualSurfaceJointInstance",
-			"Superclass": "",
+			"Superclass": "JointInstance",
 			"MemoryCategory": "PhysicsParts",
 			"Members": [],
 			"Tags": [
@@ -11066,19 +11066,19 @@
 		},
 		{
 			"Name": "ManualGlue",
-			"Superclass": "",
+			"Superclass": "ManualSurfaceJointInstance",
 			"MemoryCategory": "PhysicsParts",
 			"Members": []
 		},
 		{
 			"Name": "ManualWeld",
-			"Superclass": "",
+			"Superclass": "ManualSurfaceJointInstance",
 			"MemoryCategory": "PhysicsParts",
 			"Members": []
 		},
 		{
 			"Name": "Motor",
-			"Superclass": "",
+			"Superclass": "JointInstance",
 			"MemoryCategory": "PhysicsParts",
 			"Members": [
 				{
@@ -11160,25 +11160,25 @@
 		},
 		{
 			"Name": "Motor6D",
-			"Superclass": "",
+			"Superclass": "Motor",
 			"MemoryCategory": "PhysicsParts",
 			"Members": []
 		},
 		{
 			"Name": "Rotate",
-			"Superclass": "",
+			"Superclass": "JointInstance",
 			"MemoryCategory": "PhysicsParts",
 			"Members": []
 		},
 		{
 			"Name": "Snap",
-			"Superclass": "",
+			"Superclass": "JointInstance",
 			"MemoryCategory": "PhysicsParts",
 			"Members": []
 		},
 		{
 			"Name": "VelocityMotor",
-			"Superclass": "",
+			"Superclass": "JointInstance",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -11253,13 +11253,13 @@
 		},
 		{
 			"Name": "Weld",
-			"Superclass": "",
+			"Superclass": "JointInstance",
 			"MemoryCategory": "PhysicsParts",
 			"Members": []
 		},
 		{
 			"Name": "JointsService",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -11336,7 +11336,7 @@
 		},
 		{
 			"Name": "Keyframe",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "Animation",
 			"Members": [
 				{
@@ -11409,7 +11409,7 @@
 		},
 		{
 			"Name": "KeyframeSequence",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "Animation",
 			"Members": [
 				{
@@ -11496,7 +11496,7 @@
 		},
 		{
 			"Name": "KeyframeSequenceProvider",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "Animation",
 			"Members": [
 				{
@@ -11562,7 +11562,7 @@
 		},
 		{
 			"Name": "Lighting",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -11767,7 +11767,7 @@
 		},
 		{
 			"Name": "LocalWorkspace",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "",
 			"Members": [],
 			"Tags": [
@@ -11776,7 +11776,7 @@
 		},
 		{
 			"Name": "LuaSettings",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -11888,7 +11888,7 @@
 		},
 		{
 			"Name": "LuaWebService",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "Instances",
 			"Members": [],
 			"Tags": [
@@ -11898,7 +11898,7 @@
 		},
 		{
 			"Name": "MeshContentProvider",
-			"Superclass": "",
+			"Superclass": "CacheableContentProvider",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -11928,7 +11928,7 @@
 		},
 		{
 			"Name": "Message",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -11952,7 +11952,7 @@
 		},
 		{
 			"Name": "Hint",
-			"Superclass": "",
+			"Superclass": "Message",
 			"MemoryCategory": "Instances",
 			"Members": [],
 			"Tags": [
@@ -11961,7 +11961,7 @@
 		},
 		{
 			"Name": "Mouse",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -12270,7 +12270,7 @@
 		},
 		{
 			"Name": "PluginMouse",
-			"Superclass": "",
+			"Superclass": "Mouse",
 			"MemoryCategory": "Instances",
 			"Members": [],
 			"Tags": [
@@ -12280,7 +12280,7 @@
 		},
 		{
 			"Name": "NetworkMarker",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -12297,7 +12297,7 @@
 		},
 		{
 			"Name": "NetworkPeer",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -12326,7 +12326,7 @@
 		},
 		{
 			"Name": "NetworkClient",
-			"Superclass": "",
+			"Superclass": "NetworkPeer",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -12485,7 +12485,7 @@
 		},
 		{
 			"Name": "NetworkServer",
-			"Superclass": "",
+			"Superclass": "NetworkPeer",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -12613,7 +12613,7 @@
 		},
 		{
 			"Name": "NetworkReplicator",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -12782,7 +12782,7 @@
 		},
 		{
 			"Name": "NetworkSettings",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -13235,7 +13235,7 @@
 		},
 		{
 			"Name": "NumberValue",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -13273,7 +13273,7 @@
 		},
 		{
 			"Name": "ObjectValue",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -13311,7 +13311,7 @@
 		},
 		{
 			"Name": "PVInstance",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -13343,7 +13343,7 @@
 		},
 		{
 			"Name": "BasePart",
-			"Superclass": "",
+			"Superclass": "PVInstance",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -14229,13 +14229,13 @@
 		},
 		{
 			"Name": "CornerWedgePart",
-			"Superclass": "",
+			"Superclass": "BasePart",
 			"MemoryCategory": "Instances",
 			"Members": []
 		},
 		{
 			"Name": "FormFactorPart",
-			"Superclass": "",
+			"Superclass": "BasePart",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -14286,7 +14286,7 @@
 		},
 		{
 			"Name": "Part",
-			"Superclass": "",
+			"Superclass": "FormFactorPart",
 			"MemoryCategory": "PhysicsParts",
 			"Members": [
 				{
@@ -14313,7 +14313,7 @@
 		},
 		{
 			"Name": "FlagStand",
-			"Superclass": "",
+			"Superclass": "Part",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -14351,7 +14351,7 @@
 		},
 		{
 			"Name": "Platform",
-			"Superclass": "",
+			"Superclass": "Part",
 			"MemoryCategory": "Instances",
 			"Members": [],
 			"Tags": [
@@ -14361,7 +14361,7 @@
 		},
 		{
 			"Name": "Seat",
-			"Superclass": "",
+			"Superclass": "Part",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -14388,7 +14388,7 @@
 		},
 		{
 			"Name": "SkateboardPlatform",
-			"Superclass": "",
+			"Superclass": "Part",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -14565,7 +14565,7 @@
 		},
 		{
 			"Name": "SpawnLocation",
-			"Superclass": "",
+			"Superclass": "Part",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -14640,19 +14640,19 @@
 		},
 		{
 			"Name": "WedgePart",
-			"Superclass": "",
+			"Superclass": "FormFactorPart",
 			"MemoryCategory": "Instances",
 			"Members": []
 		},
 		{
 			"Name": "ParallelRampPart",
-			"Superclass": "",
+			"Superclass": "BasePart",
 			"MemoryCategory": "",
 			"Members": []
 		},
 		{
 			"Name": "PrismPart",
-			"Superclass": "",
+			"Superclass": "BasePart",
 			"MemoryCategory": "",
 			"Members": [
 				{
@@ -14676,7 +14676,7 @@
 		},
 		{
 			"Name": "PyramidPart",
-			"Superclass": "",
+			"Superclass": "BasePart",
 			"MemoryCategory": "",
 			"Members": [
 				{
@@ -14700,13 +14700,13 @@
 		},
 		{
 			"Name": "RightAngleRampPart",
-			"Superclass": "",
+			"Superclass": "BasePart",
 			"MemoryCategory": "",
 			"Members": []
 		},
 		{
 			"Name": "Terrain",
-			"Superclass": "",
+			"Superclass": "BasePart",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -15020,7 +15020,7 @@
 		},
 		{
 			"Name": "TrussPart",
-			"Superclass": "",
+			"Superclass": "BasePart",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -15047,7 +15047,7 @@
 		},
 		{
 			"Name": "VehicleSeat",
-			"Superclass": "",
+			"Superclass": "BasePart",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -15194,7 +15194,7 @@
 		},
 		{
 			"Name": "Model",
-			"Superclass": "",
+			"Superclass": "PVInstance",
 			"MemoryCategory": "PhysicsParts",
 			"Members": [
 				{
@@ -15328,7 +15328,7 @@
 		},
 		{
 			"Name": "RootInstance",
-			"Superclass": "",
+			"Superclass": "Model",
 			"MemoryCategory": "Instances",
 			"Members": [],
 			"Tags": [
@@ -15338,7 +15338,7 @@
 		},
 		{
 			"Name": "Workspace",
-			"Superclass": "",
+			"Superclass": "RootInstance",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -15709,7 +15709,7 @@
 		},
 		{
 			"Name": "Status",
-			"Superclass": "",
+			"Superclass": "Model",
 			"MemoryCategory": "Instances",
 			"Members": [],
 			"Tags": [
@@ -15718,7 +15718,7 @@
 		},
 		{
 			"Name": "PersonalServerService",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "",
 			"Members": [
 				{
@@ -15853,7 +15853,7 @@
 		},
 		{
 			"Name": "PhysicsPacketCache",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "Instances",
 			"Members": [],
 			"Tags": [
@@ -15864,7 +15864,7 @@
 		},
 		{
 			"Name": "PhysicsService",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "Instances",
 			"Members": [],
 			"Tags": [
@@ -15874,7 +15874,7 @@
 		},
 		{
 			"Name": "PhysicsSettings",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -16088,7 +16088,7 @@
 		},
 		{
 			"Name": "Player",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -17002,7 +17002,7 @@
 		},
 		{
 			"Name": "Players",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -17638,7 +17638,7 @@
 		},
 		{
 			"Name": "Plugin",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -17701,7 +17701,7 @@
 		},
 		{
 			"Name": "PluginManager",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -17722,7 +17722,7 @@
 		},
 		{
 			"Name": "Pose",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "Animation",
 			"Members": [
 				{
@@ -17832,7 +17832,7 @@
 		},
 		{
 			"Name": "PseudoPlayer",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "",
 			"Members": [
 				{
@@ -17894,7 +17894,7 @@
 		},
 		{
 			"Name": "RayValue",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -17932,37 +17932,37 @@
 		},
 		{
 			"Name": "ReflectionMetadata",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "Instances",
 			"Members": []
 		},
 		{
 			"Name": "ReflectionMetadataCallbacks",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "Instances",
 			"Members": []
 		},
 		{
 			"Name": "ReflectionMetadataClasses",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "Instances",
 			"Members": []
 		},
 		{
 			"Name": "ReflectionMetadataEvents",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "Instances",
 			"Members": []
 		},
 		{
 			"Name": "ReflectionMetadataFunctions",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "Instances",
 			"Members": []
 		},
 		{
 			"Name": "ReflectionMetadataItem",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -18040,7 +18040,7 @@
 		},
 		{
 			"Name": "ReflectionMetadataClass",
-			"Superclass": "",
+			"Superclass": "ReflectionMetadataItem",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -18081,25 +18081,25 @@
 		},
 		{
 			"Name": "ReflectionMetadataMember",
-			"Superclass": "",
+			"Superclass": "ReflectionMetadataItem",
 			"MemoryCategory": "Instances",
 			"Members": []
 		},
 		{
 			"Name": "ReflectionMetadataProperties",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "Instances",
 			"Members": []
 		},
 		{
 			"Name": "ReflectionMetadataYieldFunctions",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "Instances",
 			"Members": []
 		},
 		{
 			"Name": "RenderHooksService",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "",
 			"Members": [
 				{
@@ -18359,7 +18359,7 @@
 		},
 		{
 			"Name": "RenderSettings",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -18928,7 +18928,7 @@
 		},
 		{
 			"Name": "RunService",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -19005,7 +19005,7 @@
 		},
 		{
 			"Name": "ScriptContext",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -19349,7 +19349,7 @@
 		},
 		{
 			"Name": "ScriptInformationProvider",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "",
 			"Members": [
 				{
@@ -19392,7 +19392,7 @@
 		},
 		{
 			"Name": "Selection",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -19437,7 +19437,7 @@
 		},
 		{
 			"Name": "ServiceProvider",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -19527,7 +19527,7 @@
 		},
 		{
 			"Name": "DataModel",
-			"Superclass": "",
+			"Superclass": "ServiceProvider",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -20510,7 +20510,7 @@
 		},
 		{
 			"Name": "GenericSettings",
-			"Superclass": "",
+			"Superclass": "ServiceProvider",
 			"MemoryCategory": "Instances",
 			"Members": [],
 			"Tags": [
@@ -20519,7 +20519,7 @@
 		},
 		{
 			"Name": "GlobalSettings",
-			"Superclass": "",
+			"Superclass": "GenericSettings",
 			"MemoryCategory": "Instances",
 			"Members": [],
 			"Tags": [
@@ -20529,7 +20529,7 @@
 		},
 		{
 			"Name": "UserSettings",
-			"Superclass": "",
+			"Superclass": "GenericSettings",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -20549,7 +20549,7 @@
 		},
 		{
 			"Name": "Sky",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -20692,7 +20692,7 @@
 		},
 		{
 			"Name": "Smoke",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -20796,7 +20796,7 @@
 		},
 		{
 			"Name": "SocialService",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "",
 			"Members": [
 				{
@@ -20893,7 +20893,7 @@
 		},
 		{
 			"Name": "Sound",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "Internal",
 			"Members": [
 				{
@@ -21070,7 +21070,7 @@
 		},
 		{
 			"Name": "StockSound",
-			"Superclass": "",
+			"Superclass": "Sound",
 			"MemoryCategory": "",
 			"Members": [],
 			"Tags": [
@@ -21079,7 +21079,7 @@
 		},
 		{
 			"Name": "SoundService",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -21188,7 +21188,7 @@
 		},
 		{
 			"Name": "Sparkles",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -21250,7 +21250,7 @@
 		},
 		{
 			"Name": "SpawnerService",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "Instances",
 			"Members": [],
 			"Tags": [
@@ -21260,13 +21260,13 @@
 		},
 		{
 			"Name": "StarterGear",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "Instances",
 			"Members": []
 		},
 		{
 			"Name": "Stats",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -21373,7 +21373,7 @@
 		},
 		{
 			"Name": "StatsItem",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -21403,7 +21403,7 @@
 		},
 		{
 			"Name": "ProfilingItem",
-			"Superclass": "",
+			"Superclass": "StatsItem",
 			"MemoryCategory": "",
 			"Members": [
 				{
@@ -21448,7 +21448,7 @@
 		},
 		{
 			"Name": "RunningAverageItemDouble",
-			"Superclass": "",
+			"Superclass": "StatsItem",
 			"MemoryCategory": "Instances",
 			"Members": [],
 			"Tags": [
@@ -21457,7 +21457,7 @@
 		},
 		{
 			"Name": "RunningAverageItemInt",
-			"Superclass": "",
+			"Superclass": "StatsItem",
 			"MemoryCategory": "Instances",
 			"Members": [],
 			"Tags": [
@@ -21466,7 +21466,7 @@
 		},
 		{
 			"Name": "StringValue",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -21504,7 +21504,7 @@
 		},
 		{
 			"Name": "StudioTool",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "",
 			"Members": [
 				{
@@ -21563,7 +21563,7 @@
 		},
 		{
 			"Name": "TaskScheduler",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -21890,7 +21890,7 @@
 		},
 		{
 			"Name": "Team",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -21971,7 +21971,7 @@
 		},
 		{
 			"Name": "Teams",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -22002,7 +22002,7 @@
 		},
 		{
 			"Name": "TeleportService",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -22142,7 +22142,7 @@
 		},
 		{
 			"Name": "TextService",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "Instances",
 			"Members": [],
 			"Tags": [
@@ -22153,7 +22153,7 @@
 		},
 		{
 			"Name": "TextureContentProvider",
-			"Superclass": "",
+			"Superclass": "CacheableContentProvider",
 			"MemoryCategory": "",
 			"Members": [
 				{
@@ -22178,7 +22178,7 @@
 		},
 		{
 			"Name": "TimerService",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "Instances",
 			"Members": [],
 			"Tags": [
@@ -22188,7 +22188,7 @@
 		},
 		{
 			"Name": "Toolbar",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -22230,7 +22230,7 @@
 		},
 		{
 			"Name": "TouchTransmitter",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "Instances",
 			"Members": [],
 			"Tags": [
@@ -22240,7 +22240,7 @@
 		},
 		{
 			"Name": "TweenService",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "Instances",
 			"Members": [],
 			"Tags": [
@@ -22250,7 +22250,7 @@
 		},
 		{
 			"Name": "UserGameSettings",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -22419,7 +22419,7 @@
 		},
 		{
 			"Name": "Vector3Value",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -22457,7 +22457,7 @@
 		},
 		{
 			"Name": "VirtualUser",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{
@@ -22649,7 +22649,7 @@
 		},
 		{
 			"Name": "Visit",
-			"Superclass": "",
+			"Superclass": "Instance",
 			"MemoryCategory": "Instances",
 			"Members": [
 				{

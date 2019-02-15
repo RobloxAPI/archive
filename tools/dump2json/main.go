@@ -2,21 +2,34 @@
 package main
 
 import (
-	"fmt"
+	"encoding/json"
+	"github.com/anaminus/but"
 	"github.com/robloxapi/rbxapi"
 	"github.com/robloxapi/rbxapi/diff"
 	"github.com/robloxapi/rbxapi/rbxapidump"
 	"github.com/robloxapi/rbxapi/rbxapijson"
-	"io/ioutil"
 	"os"
 	"path/filepath"
+	"sort"
 	"strings"
-	"sync"
+	"time"
 )
 
-const FixConflicts = true
+const (
+	StablePath  = `../stable.txt`
+	JStablePath = `../stable.json`
+	BuildsPath  = `../../builds.json`
+	InputPath   = `../../data/api-dump/txt`
+	OutputPath  = `../../data/api-dump/json`
+)
 
-func VisitTypes(root rbxapi.Root, visit func(rbxapi.Type)) {
+type Data struct {
+	Root *rbxapijson.Root
+	Next *Data
+}
+
+// Visit each type in the API.
+func VisitTypes(root *rbxapijson.Root, visit func(rbxapi.Type)) {
 	for _, class := range root.GetClasses() {
 		visit(rbxapijson.Type{Category: "Class", Name: class.GetName()})
 		visit(rbxapijson.Type{Category: "Class", Name: class.GetSuperclass()})
@@ -50,12 +63,14 @@ func VisitTypes(root rbxapi.Root, visit func(rbxapi.Type)) {
 	}
 }
 
+// Visit each class in the API.
 func VisitClasses(root rbxapi.Root, visit func(rbxapi.Class)) {
 	for _, class := range root.GetClasses() {
 		visit(class)
 	}
 }
 
+// Visit each member of each class in the API.
 func VisitMembers(root rbxapi.Root, visit func(rbxapi.Class, rbxapi.Member)) {
 	for _, class := range root.GetClasses() {
 		for _, member := range class.GetMembers() {
@@ -64,12 +79,14 @@ func VisitMembers(root rbxapi.Root, visit func(rbxapi.Class, rbxapi.Member)) {
 	}
 }
 
+// Visit each enum in the API.
 func VisitEnums(root rbxapi.Root, visit func(rbxapi.Enum)) {
 	for _, enum := range root.GetEnums() {
 		visit(enum)
 	}
 }
 
+// Visit each item of each enum in the API.
 func VisitEnumItems(root rbxapi.Root, visit func(rbxapi.Enum, rbxapi.EnumItem)) {
 	for _, enum := range root.GetEnums() {
 		for _, item := range enum.GetEnumItems() {
@@ -78,128 +95,286 @@ func VisitEnumItems(root rbxapi.Root, visit func(rbxapi.Enum, rbxapi.EnumItem)) 
 	}
 }
 
-func renameTag(tags rbxapidump.Tags, from, to string) rbxapidump.Tags {
-	if tags.GetTag(from) {
-		tags.UnsetTag(from)
-		tags.SetTag(to)
+func FindEntity(data *Data, primary, secondary interface{}) interface{} {
+	switch primary := primary.(type) {
+	case rbxapi.Class:
+		class := data.Root.GetClass(primary.GetName())
+		if class == nil {
+			goto finish
+		}
+		switch secondary := secondary.(type) {
+		case rbxapi.Member:
+			member := class.GetMember(secondary.GetName())
+			if member == nil {
+				goto finish
+			}
+			return member
+		case nil:
+			return class
+		}
+	case rbxapi.Enum:
+		enum := data.Root.GetEnum(primary.GetName())
+		if enum == nil {
+			goto finish
+		}
+		switch secondary := secondary.(type) {
+		case rbxapi.EnumItem:
+			item := enum.GetEnumItem(secondary.GetName())
+			if item == nil {
+				goto finish
+			}
+			return item
+		case nil:
+			return enum
+		}
 	}
-	return tags
+finish:
+	if data.Next != nil {
+		return FindEntity(data.Next, primary, secondary)
+	}
+	return nil
 }
 
-func getFirst(first *rbxapijson.Root, class, member string) interface{} {
-	c := first.GetClass(class)
-	if c == nil {
-		return nil
-	}
-	if member == "" {
-		return c
-	}
-	return c.GetMember(member)
-}
-
-func PreTransform(root *rbxapidump.Root, first *rbxapijson.Root) {
+// Rewrite history to resolve naming conflicts.
+func ResolveConflicts(root *rbxapidump.Root) {
 	foundPages := false
 	VisitClasses(root, func(c rbxapi.Class) {
 		class := c.(*rbxapidump.Class)
-		if FixConflicts {
-			// Second instance of Pages class. Was immediately renamed to
-			// StandardPages in the next version.
-			if class.Name == "Pages" {
-				if foundPages {
-					class.Name = "StandardPages"
-				} else {
-					foundPages = true
+		// Second instance of Pages class. Was immediately renamed to
+		// StandardPages in the next version.
+		switch class.Name {
+		case "Pages":
+			if foundPages {
+				class.Name = "StandardPages"
+			} else {
+				foundPages = true
+			}
+		case "DataModel":
+			// Many versions saw a DataModel.Loaded function, which conflicted
+			// with the Loaded event. Apparently it went unused, and so was
+			// ultimately removed. The same is done here. Although it might be
+			// worth renaming it instead, there isn't any specific name that can
+			// be used.
+			members := class.Members[:0]
+			for _, member := range class.Members {
+				if member.GetName() == "Loaded" &&
+					member.GetMemberType() == "Function" {
+					continue
 				}
+				members = append(members, member)
 			}
-		}
-		class.Tags = renameTag(class.Tags, "notCreatable", "NotCreatable")
-		if fclass, _ := getFirst(first, class.Name, "").(*rbxapijson.Class); fclass != nil {
-			if fclass.GetTag("NotCreatable") {
-				class.SetTag("NotCreatable")
+			for i := len(members); i < len(class.Members); i++ {
+				class.Members[i] = nil
 			}
-			if fclass.GetTag("Service") {
-				class.SetTag("Service")
-			}
-			if fclass.GetTag("NotReplicated") {
-				class.SetTag("NotReplicated")
-			}
-			if fclass.GetTag("PlayerReplicated") {
-				class.SetTag("PlayerReplicated")
-			}
-		}
-		class.Tags = renameTag(class.Tags, "notbrowsable", "NotBrowsable")
-		class.Tags = renameTag(class.Tags, "deprecated", "Deprecated")
-	})
-	VisitMembers(root, func(c rbxapi.Class, member rbxapi.Member) {
-		class := c.(*rbxapidump.Class)
-		switch member := member.(type) {
-		case *rbxapidump.Property:
-			member.Tags = renameTag(member.Tags, "hidden", "Hidden")
-			member.Tags = renameTag(member.Tags, "readonly", "ReadOnly")
-			if fmember, _ := getFirst(first, class.Name, member.Name).(*rbxapijson.Property); fmember != nil {
-				if fmember.GetTag("NotReplicated") {
-					member.SetTag("NotReplicated")
-				}
-			}
-			member.Tags = renameTag(member.Tags, "notbrowsable", "NotBrowsable")
-			member.Tags = renameTag(member.Tags, "deprecated", "Deprecated")
-		case *rbxapidump.Function:
-			member.Tags = renameTag(member.Tags, "notbrowsable", "NotBrowsable")
-			member.Tags = renameTag(member.Tags, "deprecated", "Deprecated")
-			if fmember, _ := getFirst(first, class.Name, member.Name).(*rbxapijson.Function); fmember != nil {
-				if fmember.GetTag("CustomLuaState") {
-					member.SetTag("CustomLuaState")
-				}
-			}
-			if class.Name == "Instance" && member.Name == "WaitForChild" {
-				member.SetTag("CanYield")
-			}
-		case *rbxapidump.Event:
-			member.Tags = renameTag(member.Tags, "notbrowsable", "NotBrowsable")
-			member.Tags = renameTag(member.Tags, "deprecated", "Deprecated")
-		case *rbxapidump.Callback:
-			member.Tags = renameTag(member.Tags, "notbrowsable", "NotBrowsable")
-			member.Tags = renameTag(member.Tags, "deprecated", "Deprecated")
+			class.Members = members
 		}
 	})
 	foundCameraMode := false
 	VisitEnums(root, func(e rbxapi.Enum) {
 		enum := e.(*rbxapidump.Enum)
-		if FixConflicts {
-			// Second instance of CameraMode enum. Was renamed to
-			// CustomCameraMode after several versions.
-			if enum.Name == "CameraMode" {
-				if foundCameraMode {
-					enum.Name = "CustomCameraMode"
-				} else {
-					foundCameraMode = true
-				}
+		// Second instance of CameraMode enum. Was renamed to CustomCameraMode
+		// after several versions.
+		switch enum.Name {
+		case "CameraMode":
+			if foundCameraMode {
+				enum.Name = "CustomCameraMode"
+			} else {
+				foundCameraMode = true
 			}
+		case "KeyCode":
+			// Many versions saw a number of redundant KeyCode.KeypadEquals enum
+			// items. All the extras were eventually removed, so they're not
+			// very interesting for keeping around.
+			foundKeypadEquals := false
+			items := enum.Items[:0]
+			for _, item := range enum.Items {
+				if item.Name == "KeypadEquals" {
+					if foundKeypadEquals {
+						continue
+					} else {
+						foundKeypadEquals = true
+					}
+				}
+				items = append(items, item)
+			}
+			for i := len(items); i < len(enum.Items); i++ {
+				enum.Items[i] = nil
+			}
+			enum.Items = items
 		}
-		enum.Tags = renameTag(enum.Tags, "notbrowsable", "NotBrowsable")
-		enum.Tags = renameTag(enum.Tags, "deprecated", "Deprecated")
 	})
 	foundRunning := false
 	VisitEnumItems(root, func(e rbxapi.Enum, i rbxapi.EnumItem) {
+		enum := e.(*rbxapidump.Enum)
 		item := i.(*rbxapidump.EnumItem)
-		if FixConflicts {
-			// Second instance of Running enum item. Was renamed to
-			// RunningNoPhysics after many versions.
-			enum := e.(*rbxapidump.Enum)
-			if enum.Name == "HumanoidStateType" && item.Name == "Running" {
-				if foundRunning {
-					item.Name = "RunningNoPhysics"
-				} else {
-					foundRunning = true
-				}
+		// Second instance of Running enum item. Was renamed to RunningNoPhysics
+		// after many versions.
+		if enum.Name == "HumanoidStateType" && item.Name == "Running" {
+			if foundRunning {
+				item.Name = "RunningNoPhysics"
+			} else {
+				foundRunning = true
 			}
 		}
-		item.Tags = renameTag(item.Tags, "notbrowsable", "NotBrowsable")
-		item.Tags = renameTag(item.Tags, "deprecated", "Deprecated")
 	})
 }
 
-func transformType(dst *rbxapijson.Type, src *rbxapijson.Type, types *Types) {
+// func FindRenamedTypes(root *rbxapidump.Root, jroot *rbxapijson.Root) map[string]rbxapijson.Type {
+// 	types := map[string]rbxapijson.Type{}
+// 	checkType := func(a, b rbxapi.Type) {
+// 		if a.GetName() != b.GetName() {
+// 			types[a.GetName()] = rbxapijson.Type{
+// 				Category: b.GetCategory(),
+// 				Name:     b.GetName(),
+// 			}
+// 		}
+// 	}
+// 	type Params interface {
+// 		GetParameters() rbxapi.Parameters
+// 	}
+// 	checkParameters := func(a, b Params) bool {
+// 		aps := a.GetParameters().GetParameters()
+// 		bps := b.GetParameters().GetParameters()
+// 		if len(aps) != len(bps) {
+// 			return false
+// 		}
+// 		for _, ap := range aps {
+// 			for _, bp := range bps {
+// 				if ap.GetName() != bp.GetName() {
+// 					return false
+// 				}
+// 			}
+// 		}
+// 		for i, ap := range aps {
+// 			checkType(ap.GetType(), bps[i].GetType())
+// 		}
+// 		return true
+// 	}
+// 	VisitMembers(root, func(class rbxapi.Class, member rbxapi.Member) {
+// 		switch member.GetMemberType() {
+// 		case "Property":
+// 			a, _ := member.(rbxapi.Property)
+// 			b, _ := FindEntity(jroot, class, member).(rbxapi.Property)
+// 			if a == nil || b == nil {
+// 				return
+// 			}
+// 			checkType(a.GetValueType(), b.GetValueType())
+// 		case "Function":
+// 			a, _ := member.(rbxapi.Function)
+// 			b, _ := FindEntity(jroot, class, member).(rbxapi.Function)
+// 			if a == nil || b == nil {
+// 				return
+// 			}
+// 			checkType(a.GetReturnType(), b.GetReturnType())
+// 			if !checkParameters(a, b) {
+// 				but.Logf("parameters of %s.%s do not match\n", class.GetName(), member.GetName())
+// 				return
+// 			}
+// 		case "Event":
+// 			a, _ := member.(rbxapi.Event)
+// 			b, _ := FindEntity(jroot, class, member).(rbxapi.Event)
+// 			if a == nil || b == nil {
+// 				return
+// 			}
+// 			if !checkParameters(a, b) {
+// 				but.Logf("parameters of %s.%s do not match\n", class.GetName(), member.GetName())
+// 				return
+// 			}
+// 		case "Callback":
+// 			a, _ := member.(rbxapi.Callback)
+// 			b, _ := FindEntity(jroot, class, member).(rbxapi.Callback)
+// 			if a == nil || b == nil {
+// 				return
+// 			}
+// 			checkType(a.GetReturnType(), b.GetReturnType())
+// 			if !checkParameters(a, b) {
+// 				but.Logf("parameters of %s.%s do not match\n", class.GetName(), member.GetName())
+// 				return
+// 			}
+// 		}
+// 	})
+// 	return types
+// }
+
+// Correct errors in translation of the current root, using the root of the next
+// build as a reference.
+func CorrectErrors(data *Data, correctors []interface{}) {
+	type ClassCorrector interface {
+		Class(current, next *rbxapijson.Class)
+	}
+	type PropertyCorrector interface {
+		Property(current, next *rbxapijson.Property)
+	}
+	type FunctionCorrector interface {
+		Function(current, next *rbxapijson.Function)
+	}
+	type EventCorrector interface {
+		Event(current, next *rbxapijson.Event)
+	}
+	type CallbackCorrector interface {
+		Callback(current, next *rbxapijson.Callback)
+	}
+	type EnumCorrector interface {
+		Enum(current, next *rbxapijson.Enum)
+	}
+	type EnumItemCorrector interface {
+		EnumItem(current, next *rbxapijson.EnumItem)
+	}
+
+	for _, corrector := range correctors {
+		if classCorrector, ok := corrector.(ClassCorrector); ok {
+			VisitClasses(data.Root, func(c rbxapi.Class) {
+				class := c.(*rbxapijson.Class)
+				nclass, _ := FindEntity(data.Next, class, nil).(*rbxapijson.Class)
+				classCorrector.Class(class, nclass)
+			})
+		}
+		VisitMembers(data.Root, func(c rbxapi.Class, m rbxapi.Member) {
+			class := c.(*rbxapijson.Class)
+			switch member := m.(type) {
+			case *rbxapijson.Property:
+				if propertyCorrector, ok := corrector.(PropertyCorrector); ok {
+					nmember, _ := FindEntity(data.Next, class, member).(*rbxapijson.Property)
+					propertyCorrector.Property(member, nmember)
+				}
+			case *rbxapijson.Function:
+				if functionCorrector, ok := corrector.(FunctionCorrector); ok {
+					nmember, _ := FindEntity(data.Next, class, member).(*rbxapijson.Function)
+					functionCorrector.Function(member, nmember)
+				}
+			case *rbxapijson.Event:
+				if eventCorrector, ok := corrector.(EventCorrector); ok {
+					nmember, _ := FindEntity(data.Next, class, member).(*rbxapijson.Event)
+					eventCorrector.Event(member, nmember)
+				}
+			case *rbxapijson.Callback:
+				if callbackCorrector, ok := corrector.(CallbackCorrector); ok {
+					nmember, _ := FindEntity(data.Next, class, member).(*rbxapijson.Callback)
+					callbackCorrector.Callback(member, nmember)
+				}
+			}
+		})
+		if enumCorrector, ok := corrector.(EnumCorrector); ok {
+			VisitEnums(data.Root, func(e rbxapi.Enum) {
+				enum := e.(*rbxapijson.Enum)
+				nenum, _ := FindEntity(data.Next, enum, nil).(*rbxapijson.Enum)
+				enumCorrector.Enum(enum, nenum)
+			})
+		}
+		if enumItemCorrector, ok := corrector.(EnumItemCorrector); ok {
+			VisitEnumItems(data.Root, func(e rbxapi.Enum, i rbxapi.EnumItem) {
+				enum := e.(*rbxapijson.Enum)
+				item := i.(*rbxapijson.EnumItem)
+				nitem, _ := FindEntity(data.Next, enum, item).(*rbxapijson.EnumItem)
+				enumItemCorrector.EnumItem(item, nitem)
+			})
+		}
+	}
+}
+
+type Types map[string][]rbxapijson.Type
+
+func (types Types) TransformType(dst *rbxapijson.Type, src *rbxapijson.Type) {
 	// Try getting category from source.
 	if src != nil {
 		if dst.Category == "" && src.Name == dst.Name {
@@ -208,7 +383,7 @@ func transformType(dst *rbxapijson.Type, src *rbxapijson.Type, types *Types) {
 	}
 	// Try getting category from corpus of known types.
 	if dst.Category == "" {
-		if ts := types.Get(dst.Name); len(ts) > 0 {
+		if ts := types[dst.Name]; len(ts) > 0 {
 			dst.Category = ts[0].Category
 			// If there were more than one type mapped to the name, then we
 			// would have to figure out which to use based on the context.
@@ -229,7 +404,7 @@ func transformType(dst *rbxapijson.Type, src *rbxapijson.Type, types *Types) {
 			dst.Name = src.Name
 			// Try getting category from new name, if necessary.
 			if dst.Category == "" {
-				if ts := types.Get(dst.Name); len(ts) > 0 {
+				if ts := types[dst.Name]; len(ts) > 0 {
 					dst.Category = ts[0].Category
 				}
 			}
@@ -237,10 +412,10 @@ func transformType(dst *rbxapijson.Type, src *rbxapijson.Type, types *Types) {
 	}
 }
 
-func transformParameters(dst *[]rbxapijson.Parameter, src *[]rbxapijson.Parameter, types *Types) {
+func (types Types) TransformParameters(dst, src *[]rbxapijson.Parameter) {
 	if src == nil {
 		for i := range *dst {
-			transformType(&((*dst)[i].Type), nil, types)
+			types.TransformType(&((*dst)[i].Type), nil)
 		}
 		return
 	}
@@ -255,271 +430,294 @@ func transformParameters(dst *[]rbxapijson.Parameter, src *[]rbxapijson.Paramete
 			case
 				fp.Name == p.Name,
 				fp.Name != p.Name && i == j:
-				transformType(&((*dst)[i].Type), &fp.Type, types)
+				types.TransformType(&((*dst)[i].Type), &fp.Type)
 				delete(unvisited, i)
 				break
 			}
 		}
 	}
 	for i := range unvisited {
-		transformType(&((*dst)[i].Type), nil, types)
+		types.TransformType(&((*dst)[i].Type), nil)
 	}
 }
 
-func PostTransform(jroot, first *rbxapijson.Root, types *Types) {
-	VisitClasses(jroot, func(c rbxapi.Class) {
-		class := c.(*rbxapijson.Class)
-		if class.Name == "Instance" {
-			class.Superclass = "<<<ROOT>>>"
+type TypeCorrector struct {
+	Types Types
+}
+
+func (c TypeCorrector) Property(current, next *rbxapijson.Property) {
+	if next != nil {
+		c.Types.TransformType(&current.ValueType, &next.ValueType)
+	} else {
+		c.Types.TransformType(&current.ValueType, nil)
+	}
+}
+func (c TypeCorrector) Function(current, next *rbxapijson.Function) {
+	if next != nil {
+		c.Types.TransformParameters(&current.Parameters, &next.Parameters)
+		c.Types.TransformType(&current.ReturnType, &next.ReturnType)
+	} else {
+		c.Types.TransformParameters(&current.Parameters, nil)
+		c.Types.TransformType(&current.ReturnType, nil)
+	}
+}
+func (c TypeCorrector) Event(current, next *rbxapijson.Event) {
+	if next != nil {
+		c.Types.TransformParameters(&current.Parameters, &next.Parameters)
+	} else {
+		c.Types.TransformParameters(&current.Parameters, nil)
+	}
+}
+func (c TypeCorrector) Callback(current, next *rbxapijson.Callback) {
+	if next != nil {
+		c.Types.TransformParameters(&current.Parameters, &next.Parameters)
+		c.Types.TransformType(&current.ReturnType, &next.ReturnType)
+	} else {
+		c.Types.TransformParameters(&current.Parameters, nil)
+		c.Types.TransformType(&current.ReturnType, nil)
+	}
+}
+
+type FieldCorrector struct{}
+
+func (c FieldCorrector) Class(current, next *rbxapijson.Class) {
+	if next != nil {
+		// if current.Superclass == "" {
+		// 	current.Superclass = next.Superclass
+		// }
+		if current.Name == "Instance" {
+			current.Superclass = "<<<ROOT>>>"
 		}
-		if fclass, _ := getFirst(first, class.Name, "").(*rbxapijson.Class); fclass != nil {
-			class.MemoryCategory = fclass.MemoryCategory
+		current.MemoryCategory = next.MemoryCategory
+	} else {
+		if current.Superclass == "" {
+			but.Logf("class %s missing Superclass due to removal\n", current.Name)
 		}
-	})
-	VisitMembers(jroot, func(c rbxapi.Class, m rbxapi.Member) {
-		class := c.(*rbxapijson.Class)
-		switch member := m.(type) {
-		case *rbxapijson.Property:
-			if fmember, _ := getFirst(first, class.Name, member.Name).(*rbxapijson.Property); fmember != nil {
-				member.Category = fmember.Category
-				member.CanLoad = fmember.CanLoad
-				member.CanSave = fmember.CanSave
-				transformType(&member.ValueType, &fmember.ValueType, types)
-			} else {
-				transformType(&member.ValueType, nil, types)
-			}
-			member.WriteSecurity = "None"
-			member.ReadSecurity = "None"
-			for _, tag := range member.GetTags() {
-				const prefix = "ScriptWriteRestricted: ["
-				switch {
-				case strings.HasPrefix(tag, prefix):
-					member.WriteSecurity = tag[len(prefix) : len(tag)-1]
-					member.UnsetTag(tag)
-				case strings.Contains(tag, "Security"),
-					strings.Contains(tag, "security"):
-					member.ReadSecurity = tag
-					member.WriteSecurity = tag
-					member.UnsetTag(tag)
-				}
-			}
-		case *rbxapijson.Function:
-			if fmember, _ := getFirst(first, class.Name, member.Name).(*rbxapijson.Function); fmember != nil {
-				transformParameters(&member.Parameters, &fmember.Parameters, types)
-				transformType(&member.ReturnType, &fmember.ReturnType, types)
-			} else {
-				transformParameters(&member.Parameters, nil, types)
-				transformType(&member.ReturnType, nil, types)
-			}
-			member.Security = "None"
-			for _, tag := range member.GetTags() {
-				switch {
-				case strings.Contains(tag, "Security"),
-					strings.Contains(tag, "security"):
-					member.Security = tag
-					member.UnsetTag(tag)
-				}
-			}
-		case *rbxapijson.Event:
-			if fmember, _ := getFirst(first, class.Name, member.Name).(*rbxapijson.Event); fmember != nil {
-				transformParameters(&member.Parameters, &fmember.Parameters, types)
-			} else {
-				transformParameters(&member.Parameters, nil, types)
-			}
-			member.Security = "None"
-			for _, tag := range member.GetTags() {
-				switch {
-				case strings.Contains(tag, "Security"),
-					strings.Contains(tag, "security"):
-					member.Security = tag
-					member.UnsetTag(tag)
-				}
-			}
-		case *rbxapijson.Callback:
-			if fmember, _ := getFirst(first, class.Name, member.Name).(*rbxapijson.Callback); fmember != nil {
-				transformParameters(&member.Parameters, &fmember.Parameters, types)
-				transformType(&member.ReturnType, &fmember.ReturnType, types)
-			} else {
-				transformParameters(&member.Parameters, nil, types)
-				transformType(&member.ReturnType, nil, types)
-			}
-			member.Security = "None"
-			for _, tag := range member.GetTags() {
-				switch {
-				case strings.Contains(tag, "Security"),
-					strings.Contains(tag, "security"):
-					member.Security = tag
-					member.UnsetTag(tag)
-				}
+	}
+}
+func (c FieldCorrector) Property(current, next *rbxapijson.Property) {
+	if next != nil {
+		current.Category = next.Category
+		current.CanLoad = next.CanLoad
+		current.CanSave = next.CanSave
+	}
+}
+
+type TagCorrector struct{}
+
+func (c TagCorrector) correctSecurity(security *string, tags *rbxapijson.Tags) {
+	for _, tag := range tags.GetTags() {
+		switch {
+		case strings.Contains(tag, "Security"),
+			strings.Contains(tag, "security"):
+			*security = tag
+			tags.UnsetTag(tag)
+		}
+	}
+	if *security == "" {
+		*security = "None"
+	}
+}
+func (c TagCorrector) overwriteTags(dst, src *rbxapijson.Tags) {
+	*dst = (*dst)[:0]
+	dst.SetTag(src.GetTags()...)
+}
+func (c TagCorrector) renameTag(tags *rbxapijson.Tags, from, to string) {
+	if tags.GetTag(from) {
+		tags.UnsetTag(from)
+		tags.SetTag(to)
+	}
+}
+func (c TagCorrector) Class(current, next *rbxapijson.Class) {
+	c.renameTag(&current.Tags, "notCreatable", "NotCreatable")
+	if next != nil {
+		if next.GetTag("NotCreatable") {
+			current.SetTag("NotCreatable")
+		}
+		if next.GetTag("Service") {
+			current.SetTag("Service")
+		}
+		if next.GetTag("NotReplicated") {
+			current.SetTag("NotReplicated")
+		}
+		if next.GetTag("PlayerReplicated") {
+			current.SetTag("PlayerReplicated")
+		}
+	}
+	c.renameTag(&current.Tags, "notbrowsable", "NotBrowsable")
+	c.renameTag(&current.Tags, "deprecated", "Deprecated")
+
+	if current.Name == "Instance" {
+		if member, _ := current.GetMember("WaitForChild").(*rbxapijson.Function); member != nil {
+			if !member.GetTag("Yields") {
+				// Backport CanYield tag back to the point where WaitForChild
+				// was a YieldFunction.
+				member.SetTag("CanYield")
 			}
 		}
-	})
+	}
+}
+func (c TagCorrector) Property(current, next *rbxapijson.Property) {
+	for _, tag := range current.GetTags() {
+		const prefix = "ScriptWriteRestricted: ["
+		switch {
+		case strings.HasPrefix(tag, prefix):
+			current.WriteSecurity = tag[len(prefix) : len(tag)-1]
+			current.UnsetTag(tag)
+		case strings.Contains(tag, "Security"),
+			strings.Contains(tag, "security"):
+			current.ReadSecurity = tag
+			current.WriteSecurity = tag
+			current.UnsetTag(tag)
+		}
+	}
+	if current.WriteSecurity == "" {
+		current.WriteSecurity = "None"
+	}
+	if current.ReadSecurity == "" {
+		current.ReadSecurity = "None"
+	}
+	c.renameTag(&current.Tags, "hidden", "Hidden")
+	c.renameTag(&current.Tags, "readonly", "ReadOnly")
+	if next != nil {
+		if next.GetTag("NotReplicated") {
+			current.SetTag("NotReplicated")
+		}
+	}
+	c.renameTag(&current.Tags, "notbrowsable", "NotBrowsable")
+	c.renameTag(&current.Tags, "deprecated", "Deprecated")
+}
+func (c TagCorrector) Function(current, next *rbxapijson.Function) {
+	c.correctSecurity(&current.Security, &current.Tags)
+	c.renameTag(&current.Tags, "notbrowsable", "NotBrowsable")
+	c.renameTag(&current.Tags, "deprecated", "Deprecated")
+}
+func (c TagCorrector) Event(current, next *rbxapijson.Event) {
+	c.correctSecurity(&current.Security, &current.Tags)
+	c.renameTag(&current.Tags, "notbrowsable", "NotBrowsable")
+	c.renameTag(&current.Tags, "deprecated", "Deprecated")
+}
+func (c TagCorrector) Callback(current, next *rbxapijson.Callback) {
+	c.correctSecurity(&current.Security, &current.Tags)
+	c.renameTag(&current.Tags, "notbrowsable", "NotBrowsable")
+	c.renameTag(&current.Tags, "deprecated", "Deprecated")
+}
+func (c TagCorrector) Enum(current, next *rbxapijson.Enum) {
+	c.renameTag(&current.Tags, "notbrowsable", "NotBrowsable")
+	c.renameTag(&current.Tags, "deprecated", "Deprecated")
+}
+func (c TagCorrector) EnumItem(current, next *rbxapijson.EnumItem) {
+	c.renameTag(&current.Tags, "notbrowsable", "NotBrowsable")
+	c.renameTag(&current.Tags, "deprecated", "Deprecated")
 }
 
-const Input = `../../data/api-dump/txt`
-const Output = `../../data/api-dump/json`
-
-type Types struct {
-	Map map[string][]rbxapijson.Type
-	sync.Mutex
-}
-
-func (t *Types) Get(k string) []rbxapijson.Type {
-	t.Lock()
-	defer t.Unlock()
-	return t.Map[k]
-}
-
-func (t *Types) Get2(k string) ([]rbxapijson.Type, bool) {
-	t.Lock()
-	defer t.Unlock()
-	v, ok := t.Map[k]
-	return v, ok
-}
-
-func (t *Types) Set(k string, v []rbxapijson.Type) {
-	t.Lock()
-	defer t.Unlock()
-	t.Map[k] = v
+type Build struct {
+	Hash    string
+	Date    time.Time
+	Version string
 }
 
 func main() {
-	// Backport unavailable fields with the first stable JSON dump.
-	f, err := os.Open(`../stable.json`)
-	if err != nil {
-		fmt.Println("failed to open stable dump:", err)
-	}
-	stable, err := rbxapijson.Decode(f)
-	f.Close()
-	if err != nil {
-		fmt.Println("failed to decode stable dump:", err)
-		return
+	var err error
+	_ = err
+
+	// var stable *rbxapidump.Root
+	// {
+	// 	f, err := os.Open(StablePath)
+	// 	but.IfFatal(err, "open stable dump")
+	// 	stable, err = rbxapidump.Decode(f)
+	// 	f.Close()
+	// 	but.IfFatal(err, "decode stable dump")
+	// }
+	var jstable *rbxapijson.Root
+	{
+		f, err := os.Open(JStablePath)
+		but.IfFatal(err, "open stable JSON dump")
+		jstable, err = rbxapijson.Decode(f)
+		f.Close()
+		but.IfFatal(err, "decode stable JSON dump")
 	}
 
-	if err := os.MkdirAll(Output, 0666); err != nil {
-		fmt.Println("failed to make output directory:", err)
-		return
-	}
-
-	dirs, err := ioutil.ReadDir(Input)
-	if err != nil {
-		fmt.Println("failed to read input directory:", err)
-		return
-	}
+	// renamedTypes := FindRenamedTypes(stable, jstable)
 
 	// Manually add types that had been removed at some point.
-	types := &Types{
-		Map: map[string][]rbxapijson.Type{
-			// Replaced by "Class:<class>".
-			"Object": {{Category: "DataType", Name: "Object"}},
-			// Renamed to "CFrame".
-			"CoordinateFrame": {{Category: "DataType", Name: "CoordinateFrame"}},
-			// All references removed.
-			"SystemAddress":        {{Category: "DataType", Name: "SystemAddress"}},
-			"BuildPermission":      {{Category: "Enum", Name: "BuildPermission"}},
-			"PhysicsReceiveMethod": {{Category: "Enum", Name: "PhysicsReceiveMethod"}},
-			"PhysicsSendMethod":    {{Category: "Enum", Name: "PhysicsSendMethod"}},
-			"PrismSides":           {{Category: "Enum", Name: "PrismSides"}},
-			"PyramidSides":         {{Category: "Enum", Name: "PyramidSides"}},
-		},
+	types := Types{
+		// Replaced by "Class:<class>".
+		"Object": {{Category: "DataType", Name: "Object"}},
+		// Renamed to "CFrame".
+		"CoordinateFrame": {{Category: "DataType", Name: "CoordinateFrame"}},
+		// All references removed.
+		"SystemAddress":        {{Category: "DataType", Name: "SystemAddress"}},
+		"BuildPermission":      {{Category: "Enum", Name: "BuildPermission"}},
+		"PhysicsReceiveMethod": {{Category: "Enum", Name: "PhysicsReceiveMethod"}},
+		"PhysicsSendMethod":    {{Category: "Enum", Name: "PhysicsSendMethod"}},
+		"PrismSides":           {{Category: "Enum", Name: "PrismSides"}},
+		"PyramidSides":         {{Category: "Enum", Name: "PyramidSides"}},
 	}
 	typeVisitor := func(typ rbxapi.Type) {
-		types.Lock()
-		defer types.Unlock()
 		cat := typ.GetCategory()
 		if cat == "" {
 			return
 		}
 		name := typ.GetName()
-		ts := types.Map[name]
-		for _, t := range ts {
+		for _, t := range types[name] {
 			if t.GetCategory() == cat {
 				return
 			}
 		}
-		types.Map[name] = append(types.Map[name], rbxapijson.Type{Category: typ.GetCategory(), Name: typ.GetName()})
+		types[name] = append(types[name], rbxapijson.Type{Category: typ.GetCategory(), Name: typ.GetName()})
 	}
-	VisitTypes(stable, typeVisitor)
+	VisitTypes(jstable, typeVisitor)
 
-	var wg sync.WaitGroup
-	for _, file := range dirs {
-		wg.Add(1)
-		go func(file os.FileInfo) {
-			defer wg.Done()
-			name := file.Name()
-			base := name[:len(name)-len(filepath.Ext(name))]
-			fmt.Println("starting ", base)
-			f, err := os.Open(filepath.Join(Input, name))
-			if err != nil {
-				fmt.Println("failed to open input ", name, ":", err)
-				return
-			}
-			root, err := rbxapidump.Decode(f)
-			f.Close()
-			if err != nil {
-				fmt.Println("failed to decode ", name, ":", err)
-				return
-			}
-
-			PreTransform(root, stable)
-			// In theory, every type in every build should be visited first,
-			// or else types that are added in a particular version cannot be
-			// backported to previous versions. In practice, such case are
-			// taken care of almost entirely by having visited stable first.
-			// Only a handful of types were removed, and do not appear in
-			// stable, but can be added back manually.
-			VisitTypes(root, typeVisitor)
-			jroot := &rbxapijson.Root{}
-			jroot.Patch((&diff.Diff{Prev: &rbxapidump.Root{}, Next: root}).Diff())
-			PostTransform(jroot, stable, types)
-			if FixConflicts {
-				// Many versions saw a DataModel.Loaded function, which
-				// conflicted with the Loaded event. Apparently it went
-				// unused, and so was ultimately removed. The same is done
-				// here. Although it might be worth renaming it instead, there
-				// isn't any specific name that can be used.
-				if class, _ := jroot.GetClass("DataModel").(*rbxapijson.Class); class != nil {
-					for i := 0; i < len(class.Members); {
-						if class.Members[i].GetMemberType() == "Function" && class.Members[i].GetName() == "Loaded" {
-							copy(class.Members[i:], class.Members[i+1:])
-							class.Members[len(class.Members)-1] = nil
-							class.Members = class.Members[:len(class.Members)-1]
-						} else {
-							i++
-						}
-					}
-				}
-				// Many versions saw a number of redundant
-				// KeyCode.KeypadEquals enum items. All the extras were
-				// eventually removed, so they're not very interesting for
-				// keeping around.
-				if enum, _ := jroot.GetEnum("KeyCode").(*rbxapijson.Enum); enum != nil {
-					foundKeypadEquals := false
-					for i := 0; i < len(enum.Items); i++ {
-						if enum.Items[i].Name == "KeypadEquals" {
-							if foundKeypadEquals {
-								copy(enum.Items[i:], enum.Items[i+1:])
-								enum.Items[len(enum.Items)-1] = nil
-								enum.Items = enum.Items[:len(enum.Items)-1]
-								i--
-							} else {
-								foundKeypadEquals = true
-							}
-						}
-					}
-				}
-			}
-
-			if f, err = os.Create(filepath.Join(Output, base+".json")); err != nil {
-				fmt.Println("failed to open output ", name, ":", err)
-			}
-			if err := rbxapijson.Encode(f, jroot); err != nil {
-				fmt.Println("failed to encode ", name, ":", err)
-			}
-			f.Close()
-			fmt.Println("finished ", base)
-		}(file)
+	var builds []Build
+	{
+		f, err := os.Open(BuildsPath)
+		but.IfFatal(err, "open builds file")
+		err = json.NewDecoder(f).Decode(&builds)
+		f.Close()
+		but.IfFatal(err, "parse builds file")
 	}
-	wg.Wait()
-	fmt.Println("done")
+
+	but.IfFatal(os.MkdirAll(OutputPath, 0666), "make output directory")
+
+	sort.Slice(builds, func(i, j int) bool {
+		return builds[i].Date.After(builds[j].Date)
+	})
+	next := &Data{Root: jstable}
+	for i, build := range builds {
+		_ = i
+		// but.Logf("Process %03d/%03d: %s\n", i, len(builds), build.Hash)
+		var root *rbxapidump.Root
+		{
+			f, err := os.Open(filepath.Join(InputPath, build.Hash+".txt"))
+			but.IfFatalf(err, "open dump %s", build.Hash)
+			root, err = rbxapidump.Decode(f)
+			f.Close()
+			but.IfFatal(err, "decode dump %s", build.Hash)
+		}
+
+		ResolveConflicts(root)
+		jroot := &rbxapijson.Root{}
+		jroot.Patch((&diff.Diff{Prev: &rbxapidump.Root{}, Next: root}).Diff())
+		data := &Data{Root: jroot, Next: next}
+
+		VisitTypes(jroot, typeVisitor)
+
+		CorrectErrors(data, []interface{}{
+			TypeCorrector{Types: types},
+			FieldCorrector{},
+			TagCorrector{},
+		})
+
+		{
+			f, err := os.Create(filepath.Join(OutputPath, build.Hash+".json"))
+			but.IfFatalf(err, "create output file %s", build.Hash)
+			err = rbxapijson.Encode(f, jroot)
+			f.Close()
+			but.IfFatalf(err, "encode output %s", build.Hash)
+		}
+		// Current root is now pristine; it can be used as a reference for
+		// correction.
+		next = data
+	}
 }

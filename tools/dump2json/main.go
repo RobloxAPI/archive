@@ -465,20 +465,26 @@ func (types Types) Visit(typ rbxapi.Type) {
 	types[name] = append(types[name], rbxapijson.Type{Category: typ.GetCategory(), Name: typ.GetName()})
 }
 
+type CorrectEnums struct {
+	Enums map[string]struct{}
+}
+
+func (c CorrectEnums) Root(current, next *rbxapijson.Root) {
+	// Backport missing enum list.
+	if len(current.Enums) == 0 {
+		current.Enums = make([]*rbxapijson.Enum, 0, len(next.Enums))
+		for _, enum := range next.Enums {
+			if _, ok := c.Enums[enum.Name]; ok {
+				current.Enums = append(current.Enums, enum.Copy().(*rbxapijson.Enum))
+			}
+		}
+	}
+}
+
 type CorrectTypes struct {
 	Types Types
 }
 
-func (c CorrectTypes) Root(current, next *rbxapijson.Root) {
-	// Backport missing enum list.
-	if len(current.Enums) == 0 {
-		// TODO: Filter out enums that are not referred to by type.
-		current.Enums = make([]*rbxapijson.Enum, len(next.Enums))
-		for i, enum := range next.Enums {
-			current.Enums[i] = enum.Copy().(*rbxapijson.Enum)
-		}
-	}
-}
 func (c CorrectTypes) Property(current, next *rbxapijson.Property) {
 	if next != nil {
 		c.Types.TransformType(&current.ValueType, &next.ValueType)
@@ -730,6 +736,13 @@ func main() {
 			CorrectFields{},
 			CorrectTags{},
 		})
+		enumTypes := map[string]struct{}{}
+		VisitTypes(jroot, func(typ rbxapi.Type) {
+			if typ.GetCategory() == "Enum" {
+				enumTypes[typ.GetName()] = struct{}{}
+			}
+		})
+		CorrectErrors(data, []interface{}{CorrectEnums{enumTypes}})
 
 		{
 			f, err := os.Create(filepath.Join(OutputPath, build.Hash+".json"))

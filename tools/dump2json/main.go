@@ -451,6 +451,20 @@ func (types Types) TransformParameters(dst, src *[]rbxapijson.Parameter) {
 	}
 }
 
+func (types Types) Visit(typ rbxapi.Type) {
+	cat := typ.GetCategory()
+	if cat == "" {
+		return
+	}
+	name := typ.GetName()
+	for _, t := range types[name] {
+		if t.GetCategory() == cat {
+			return
+		}
+	}
+	types[name] = append(types[name], rbxapijson.Type{Category: typ.GetCategory(), Name: typ.GetName()})
+}
+
 type CorrectTypes struct {
 	Types Types
 }
@@ -675,20 +689,7 @@ func main() {
 		"PrismSides":           {{Category: "Enum", Name: "PrismSides"}},
 		"PyramidSides":         {{Category: "Enum", Name: "PyramidSides"}},
 	}
-	typeVisitor := func(typ rbxapi.Type) {
-		cat := typ.GetCategory()
-		if cat == "" {
-			return
-		}
-		name := typ.GetName()
-		for _, t := range types[name] {
-			if t.GetCategory() == cat {
-				return
-			}
-		}
-		types[name] = append(types[name], rbxapijson.Type{Category: typ.GetCategory(), Name: typ.GetName()})
-	}
-	VisitTypes(jstable, typeVisitor)
+	VisitTypes(jstable, types.Visit)
 
 	var builds []Build
 	{
@@ -722,7 +723,7 @@ func main() {
 		jroot.Patch((&diff.Diff{Prev: &rbxapidump.Root{}, Next: root}).Diff())
 		data := &Data{Root: jroot, Next: next}
 
-		VisitTypes(jroot, typeVisitor)
+		VisitTypes(jroot, types.Visit)
 
 		CorrectErrors(data, []interface{}{
 			CorrectTypes{Types: types},

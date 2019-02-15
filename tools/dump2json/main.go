@@ -451,11 +451,11 @@ func (types Types) TransformParameters(dst, src *[]rbxapijson.Parameter) {
 	}
 }
 
-type TypeCorrector struct {
+type CorrectTypes struct {
 	Types Types
 }
 
-func (c TypeCorrector) Root(current, next *rbxapijson.Root) {
+func (c CorrectTypes) Root(current, next *rbxapijson.Root) {
 	// Backport missing enum list.
 	if len(current.Enums) == 0 {
 		// TODO: Filter out enums that are not referred to by type.
@@ -465,14 +465,14 @@ func (c TypeCorrector) Root(current, next *rbxapijson.Root) {
 		}
 	}
 }
-func (c TypeCorrector) Property(current, next *rbxapijson.Property) {
+func (c CorrectTypes) Property(current, next *rbxapijson.Property) {
 	if next != nil {
 		c.Types.TransformType(&current.ValueType, &next.ValueType)
 	} else {
 		c.Types.TransformType(&current.ValueType, nil)
 	}
 }
-func (c TypeCorrector) Function(current, next *rbxapijson.Function) {
+func (c CorrectTypes) Function(current, next *rbxapijson.Function) {
 	if next != nil {
 		c.Types.TransformParameters(&current.Parameters, &next.Parameters)
 		c.Types.TransformType(&current.ReturnType, &next.ReturnType)
@@ -481,14 +481,14 @@ func (c TypeCorrector) Function(current, next *rbxapijson.Function) {
 		c.Types.TransformType(&current.ReturnType, nil)
 	}
 }
-func (c TypeCorrector) Event(current, next *rbxapijson.Event) {
+func (c CorrectTypes) Event(current, next *rbxapijson.Event) {
 	if next != nil {
 		c.Types.TransformParameters(&current.Parameters, &next.Parameters)
 	} else {
 		c.Types.TransformParameters(&current.Parameters, nil)
 	}
 }
-func (c TypeCorrector) Callback(current, next *rbxapijson.Callback) {
+func (c CorrectTypes) Callback(current, next *rbxapijson.Callback) {
 	if next != nil {
 		c.Types.TransformParameters(&current.Parameters, &next.Parameters)
 		c.Types.TransformType(&current.ReturnType, &next.ReturnType)
@@ -498,9 +498,9 @@ func (c TypeCorrector) Callback(current, next *rbxapijson.Callback) {
 	}
 }
 
-type FieldCorrector struct{}
+type CorrectFields struct{}
 
-func (c FieldCorrector) Class(current, next *rbxapijson.Class) {
+func (c CorrectFields) Class(current, next *rbxapijson.Class) {
 	if next != nil {
 		if current.Superclass == "" {
 			current.Superclass = next.Superclass
@@ -516,7 +516,7 @@ func (c FieldCorrector) Class(current, next *rbxapijson.Class) {
 		}
 	}
 }
-func (c FieldCorrector) Property(current, next *rbxapijson.Property) {
+func (c CorrectFields) Property(current, next *rbxapijson.Property) {
 	if next != nil {
 		current.Category = next.Category
 		current.CanLoad = next.CanLoad
@@ -524,9 +524,9 @@ func (c FieldCorrector) Property(current, next *rbxapijson.Property) {
 	}
 }
 
-type TagCorrector struct{}
+type CorrectTags struct{}
 
-func (c TagCorrector) correctSecurity(security *string, tags *rbxapijson.Tags) {
+func (c CorrectTags) correctSecurity(security *string, tags *rbxapijson.Tags) {
 	for _, tag := range tags.GetTags() {
 		switch {
 		case strings.Contains(tag, "Security"),
@@ -539,17 +539,17 @@ func (c TagCorrector) correctSecurity(security *string, tags *rbxapijson.Tags) {
 		*security = "None"
 	}
 }
-func (c TagCorrector) overwriteTags(dst, src *rbxapijson.Tags) {
+func (c CorrectTags) overwriteTags(dst, src *rbxapijson.Tags) {
 	*dst = (*dst)[:0]
 	dst.SetTag(src.GetTags()...)
 }
-func (c TagCorrector) renameTag(tags *rbxapijson.Tags, from, to string) {
+func (c CorrectTags) renameTag(tags *rbxapijson.Tags, from, to string) {
 	if tags.GetTag(from) {
 		tags.UnsetTag(from)
 		tags.SetTag(to)
 	}
 }
-func (c TagCorrector) Class(current, next *rbxapijson.Class) {
+func (c CorrectTags) Class(current, next *rbxapijson.Class) {
 	c.renameTag(&current.Tags, "notCreatable", "NotCreatable")
 	if next != nil {
 		if next.GetTag("NotCreatable") {
@@ -578,7 +578,7 @@ func (c TagCorrector) Class(current, next *rbxapijson.Class) {
 		}
 	}
 }
-func (c TagCorrector) Property(current, next *rbxapijson.Property) {
+func (c CorrectTags) Property(current, next *rbxapijson.Property) {
 	for _, tag := range current.GetTags() {
 		const prefix = "ScriptWriteRestricted: ["
 		switch {
@@ -608,26 +608,26 @@ func (c TagCorrector) Property(current, next *rbxapijson.Property) {
 	c.renameTag(&current.Tags, "notbrowsable", "NotBrowsable")
 	c.renameTag(&current.Tags, "deprecated", "Deprecated")
 }
-func (c TagCorrector) Function(current, next *rbxapijson.Function) {
+func (c CorrectTags) Function(current, next *rbxapijson.Function) {
 	c.correctSecurity(&current.Security, &current.Tags)
 	c.renameTag(&current.Tags, "notbrowsable", "NotBrowsable")
 	c.renameTag(&current.Tags, "deprecated", "Deprecated")
 }
-func (c TagCorrector) Event(current, next *rbxapijson.Event) {
+func (c CorrectTags) Event(current, next *rbxapijson.Event) {
 	c.correctSecurity(&current.Security, &current.Tags)
 	c.renameTag(&current.Tags, "notbrowsable", "NotBrowsable")
 	c.renameTag(&current.Tags, "deprecated", "Deprecated")
 }
-func (c TagCorrector) Callback(current, next *rbxapijson.Callback) {
+func (c CorrectTags) Callback(current, next *rbxapijson.Callback) {
 	c.correctSecurity(&current.Security, &current.Tags)
 	c.renameTag(&current.Tags, "notbrowsable", "NotBrowsable")
 	c.renameTag(&current.Tags, "deprecated", "Deprecated")
 }
-func (c TagCorrector) Enum(current, next *rbxapijson.Enum) {
+func (c CorrectTags) Enum(current, next *rbxapijson.Enum) {
 	c.renameTag(&current.Tags, "notbrowsable", "NotBrowsable")
 	c.renameTag(&current.Tags, "deprecated", "Deprecated")
 }
-func (c TagCorrector) EnumItem(current, next *rbxapijson.EnumItem) {
+func (c CorrectTags) EnumItem(current, next *rbxapijson.EnumItem) {
 	c.renameTag(&current.Tags, "notbrowsable", "NotBrowsable")
 	c.renameTag(&current.Tags, "deprecated", "Deprecated")
 }
@@ -725,9 +725,9 @@ func main() {
 		VisitTypes(jroot, typeVisitor)
 
 		CorrectErrors(data, []interface{}{
-			TypeCorrector{Types: types},
-			FieldCorrector{},
-			TagCorrector{},
+			CorrectTypes{Types: types},
+			CorrectFields{},
+			CorrectTags{},
 		})
 
 		{
